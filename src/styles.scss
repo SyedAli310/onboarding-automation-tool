@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+.page-container {
+    max-width: 80rem;
+}
+.btn-primary {
+    background-color:  #5746AF !important;
+}
+
+.bg-primary-color {
+    background-color: #5746AF !important;
+}
+
+.bg-primary-color-light {
+    background-color: rgb(87, 70, 175, 0.25) !important;
+}
+
+.text-primary-color {
+    color: #5746AF !important;
+}
+
+.border-primary-color {
+    border-color: #5746AF !important;
+}
+
+.on-hover-shadow {
+    transition: all 0.3s;
+}
+
+.on-hover-shadow:hover {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    transform: translateY(-2.5px);
+}
+
+.progress {
+    height: 7px !important; /* Or any desired height */
+    &-bar {
+        background-color: #5746AF !important;
+    }
+}
+
+.action-card:hover {
+    border-color: #5746AF !important;
+}
