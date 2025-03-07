@@ -1,0 +1,101 @@
+<div class="modal-header bg-primary">
+    <h5 class="modal-title text-primary">Goal settings</h5>
+    <span class="ki ki-close icon-no-hover" (click)="closeModal()"></span>
+</div>
+<div class="modal-body">
+    <div [formGroup]="objectiveSettingsForm" *ngIf="objectiveSettingsForm">
+        <div class="mb-20">
+            <p class="text-large font-weight-semi-bold mb-10">Enable Sub-goal</p>
+            <div class="mb-10 d-flex align-items-center">
+                <input type="checkbox" [checked]="objectiveSettingsForm.get('useKeyResults').value" (change)="toggleUseKeyResult($event.target.checked)" id="toggle-switch" class="toggle-switch">
+                <label for="toggle-switch" class="switch-label">I’d wish to use sub goals in the organisation</label>
+                <span class="ki ki-sm ki-info cursor-pointer ml-4" tooltip="Sub-goals help achieve goals more efficiently and effectively by breaking down complex objectives into smaller, measurable parts." placement="bottom" [adaptivePosition]="false" container="body" containerClass="w-300"></span>
+            </div>
+            <div class="bg-slate-10 py-12 px-16 border-radius-4 ml-40 mb-20 w-250 d-flex align-items-center border" *ngIf="isKeyResultEnabled()">
+                <input type="checkbox" class="checkbox-sm" id="sub-goal-mand" formControlName="isKeyResultsMandatory"/>
+                <label for="sub-goal-mand">Mandate the sub goal</label>
+                <span class="ki ki-sm ki-info cursor-pointer ml-4" tooltip="Enforcing this option will require all goals to include at least one sub-goal, ensuring detailed tracking of progress." placement="bottom" [adaptivePosition]="false" container="body" containerClass="w-300"></span>
+            </div>
+        </div>
+
+        <p class="font-weight-semi-bold mb-16">Choose the terminology that suits your organisation</p>
+        <ng-container *ngFor="let terminology of goalTerminologies">
+            <div class="d-flex align-items-center mb-12" >
+                <div>
+                    <input type="radio" [checked]="isTerminologySelected(terminology.id)" id="{{terminology.title}}" (change)="changeGoalTerminology(terminology.id)" />
+                    <label for="{{terminology.title}}">
+                        <span class="mr-4">{{getTerminologyTitle(terminology.id)}}</span>
+                    </label>
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="mt-20">
+            <p class="text-small mb-8">Selected terminology</p>
+            <div class="card clear-margin border-radius-4 bg-slate-10">
+                <div class="card-body clear-padding">
+                    <div class="p-16">
+                        <div class="d-flex align-items-center gap-2">
+                            <div>
+                                <p class="text-large font-weight-semi-bold">{{!isKeyResultEnabled() ? getTerminologyTitle(objectiveSettingsForm.get('goalTerminology')?.value) : getSelectedTerminology()?.title}}</p>
+                                <p class="text-small text-secondary">{{getObjectiveAliasDescription(objectiveSettingsForm.get('goalTerminology')?.value)}}</p>
+                            </div>
+                            <div class="bg-primary border-radius-4 border py-12 px-20" *ngIf="!isCustomTerminology()" [@appearAnimation]>
+                                <div class="d-flex align-items-center gap-1 mb-4">
+                                    <i class="ki ki-bullseye-arrow ki-sm ki-blue"></i>
+                                    <span>{{getSelectedGoalTerminology()}}</span>
+                                </div>
+                                <div class="d-flex align-items-center gap-1 mb-4 ml-30" *ngIf="isKeyResultEnabled()" [@appearAnimation]>
+                                    <i class="ki ki-chart-line-up ki-sm ki-accent-violet"></i>
+                                    <span>{{getSelectedSubGoalTerminology()}}</span>
+                                </div>
+                                <div class="d-flex align-items-center gap-1 mb-4" [ngClass]="isKeyResultEnabled() ? 'ml-60' : 'ml-30'">
+                                    <i class="ki ki-list-checked ki-sm ki-accent-green"></i>
+                                    <span>{{getSelectedTaskTerminology()}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-top pt-16 mt-16" *ngIf="isCustomTerminology()" [@appearAnimation]>
+                            <div class="row no-gutters mb-12">
+                                <div class="col-default-6 pr-16">
+                                    <label for="objectiveAlias" class="mb-4">Goal label</label>
+                                    <input type="text" id="objectiveAlias" formControlName="objectiveAlias" class="form-control bg-primary" [class.w-100]="!isKeyResultEnabled()" placeholder="Input text">
+                                    <xhr-validation-messages 
+                                        [validationMessages]="validationMessages.objectiveAlias"
+                                        [formController]="objectiveSettingsForm.get('objectiveAlias')"
+                                        [isFormSubmitted]="isFormSubmitted">
+                                    </xhr-validation-messages>
+                                </div>
+                                <div class="col-default-6 pr-16" *ngIf="isKeyResultEnabled()">
+                                    <div class="mb-12">
+                                        <label for="keyResultAlias" class="mb-4">Sub goal label</label>
+                                        <input type="text" id="keyResultAlias" formControlName="keyResultAlias" class="form-control bg-primary" placeholder="Input text">
+                                        <xhr-validation-messages 
+                                            [validationMessages]="validationMessages.keyResultAlias"
+                                            [formController]="objectiveSettingsForm.get('keyResultAlias')"
+                                            [isFormSubmitted]="isFormSubmitted">
+                                        </xhr-validation-messages>
+                                    </div>
+                                </div>
+                                <div class="col-default-6 pr-16">
+                                    <label for="initiativeAlias" class="mb-4">Task label</label>
+                                    <input type="text" id="initiativeAlias" formControlName="initiativeAlias" class="form-control bg-primary" placeholder="Input text">
+                                    <xhr-validation-messages 
+                                        [validationMessages]="validationMessages.initiativeAlias"
+                                        [formController]="objectiveSettingsForm.get('initiativeAlias')"
+                                        [isFormSubmitted]="isFormSubmitted">
+                                    </xhr-validation-messages>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+    <button type="button" class="btn btn-primary" (click)="saveGoalSettings()">Save changes</button>
+</div>
+

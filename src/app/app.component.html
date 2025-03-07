@@ -1,10 +1,9 @@
 <app-top-nav></app-top-nav>
 <div class="page-container mx-auto">
-    <h4 class="mb-10 font-weight-bold" @appearAnimation>Subscription details</h4>
     <div class="card border-radius-6 clear-margin overflow-hidden" @appearAnimation>
         <div class="card-body h-100">
             <div class="d-flex align-items-start gap-2 h-100 ">
-                <div class=" d-flex align-items-start gap-1 h-100">
+                <div class="d-flex align-items-start gap-1 h-100">
                     <div class="employee-profile-header mt-2">
                         <div class="profile profile-36">
                             <div class="profile-picture-container">
@@ -34,8 +33,8 @@
                     </div>
                 </div>
 
-                <div class="d-flex align-items-center flex-wrap flex-grow-1 gap-5 border-left pl-40 ml-40 py-8">
-                    <div class="d-flex align-items-center gap-2 w-200">
+                <div class="d-flex align-items-center flex-wrap gap-4 flex-grow-1 border-left pl-40 ml-40 py-8">
+                    <div class="d-flex align-items-center gap-2 w-200 mb-16">
                         <div class="dot dot-xl bg-primary-color-light">
                             <i class="ki ki-history text-primary-color"></i>
                         </div>
@@ -44,7 +43,7 @@
                             <p class="text-primary">Jun 14, 2026</p>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-2 w-200">
+                    <div class="d-flex align-items-center gap-2 w-200 mb-16">
                         <div class="dot dot-xl bg-primary-color-light">
                             <i class="ki ki-calendar text-primary-color"></i>
                         </div>
@@ -53,7 +52,7 @@
                             <p class="text-primary">Jun 14, 2022</p>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-2 w-200">
+                    <div class="d-flex align-items-center gap-2 w-200 mb-16">
                         <div class="dot dot-xl bg-primary-color-light">
                             <i class="ki ki-user text-primary-color"></i>
                         </div>
@@ -62,7 +61,7 @@
                             <p class="text-primary">Syed Ali</p>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-2 w-200">
+                    <div class="d-flex align-items-center gap-2 w-200 mb-16">
                         <div class="dot dot-xl bg-primary-color-light">
                             <i class="ki ki-location ki-lg text-primary-color"></i>
                         </div>
@@ -71,9 +70,9 @@
                             <p class="text-primary">Central Us-01</p>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-2 w-200">
+                    <div class="d-flex align-items-center gap-2 w-200 mb-16">
                         <div class="dot dot-xl bg-primary-color-light">
-                            <i class="ki ki-circle-right-dotted text-primary-color"></i>
+                            <i class="ki ki-clock-fill text-primary-color"></i>
                         </div>
                         <div>
                             <p class="text-secondary text-uppercase text-x-small">Onboard status</p>
@@ -82,7 +81,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-2 w-200">
+                    <div class="d-flex align-items-center gap-2 w-200 mb-16">
                         <div class="dot dot-xl bg-primary-color-light">
                             <i class="ki ki-user-tie ki-lg text-primary-color"></i>
                         </div>
@@ -92,7 +91,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="d-flex">
+                    <button class="btn btn-primary btn-sm">Schedule meeting</button>
 
+                </div>
             </div>
         </div>
         <ul class="nav sub-topnav border-top border-bottom-0">
@@ -108,109 +110,249 @@
         </ul>
     </div>
 
-    <h4 class="mb-10 mt-40 font-weight-bold" @appearAnimation>Onboarding progress</h4>
-    <div class="card border-radius-6 clear-margin on-hover-shadow" @appearAnimation>
-        <div class="card-body">
-            <div class="d-flex align-items-center gap-2 w-100 my-12 px-16">
-                <div class="d-flex flex-column align-items-center">
-                    <div class="dot dot-xxl bg-primary-color mb-4">
-                        <i class="ki ki-check-circle ki-lg text-white"></i>
+    <div class="mt-40">
+        <div class="card border-radius-6 clear-margin on-hover-shadow" @appearAnimation>
+            <div class="card-body">
+                <h4 class="mb-30 font-weight-bold" @appearAnimation>Onboarding progress</h4>
+                <div class="d-flex align-items-start gap-2 w-100 my-12 px-16">
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="dot dot-xxl bg-primary-color-light mb-4">
+                            <i class="ki ki-check-circle ki-lg text-primary"></i>
+                        </div>
+                        <p class="font-weight-semi-bold">Data collection</p>
+                        <p class="text-secondary">100% complete</p>
                     </div>
-                    <p class="font-weight-semi-bold">Data collection</p>
-                    <p class="text-secondary">100% complete</p>
-                </div>
-                <div class="border-bottom border-primary-color border-2 w-200 flex-grow-1"></div>
-                <div class="d-flex flex-column align-items-center">
-                    <div class="dot dot-xxl bg-primary-color-light mb-4">
-                        <h2 class="text-primary">2</h2>
+                    <div class="border-bottom border-primary-color border-2 w-150 flex-grow-1 mt-20"></div>
+                    <div class="d-flex flex-column align-items-center">
+                        <span class="selector"></span>
+                        <div class="dot dot-xxl bg-primary-color mb-4">
+                            <h2 class="text-white">2</h2>
+                        </div>
+                        <p class="font-weight-semi-bold">Configuration</p>
+                        <p class="text-secondary">25% complete</p>
                     </div>
-                    <p class="font-weight-semi-bold">Configuration</p>
-                    <p class="text-secondary">70% complete</p>
-                </div>
-                <div class="border-bottom border-secondary border-2 w-200 flex-grow-1"></div>
-                <div class="d-flex flex-column align-items-center">
-                    <div class="dot dot-xxl bg-primary-color-light mb-4">
-                        <h2 class="text-primary">3</h2>
+                    <div class="border-bottom border-secondary border-2 w-150 flex-grow-1 mt-20"></div>
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="dot dot-xxl bg-primary-color-light mb-4">
+                            <h2 class="text-primary">3</h2>
+                        </div>
+                        <p class="font-weight-semi-bold">Testing</p>
+                        <p class="text-secondary">0% complete</p>
                     </div>
-                    <p class="font-weight-semi-bold">Testing</p>
-                    <p class="text-secondary">0% complete</p>
-                </div>
-                <div class="border-bottom border-secondary border-2 w-200 flex-grow-1"></div>
-                <div class="d-flex flex-column align-items-center">
-                    <div class="dot dot-xxl bg-primary-color-light mb-4">
-                        <h2 class="text-primary">4</h2>
+                    <div class="border-bottom border-secondary border-2 w-150 flex-grow-1 mt-20"></div>
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="dot dot-xxl bg-primary-color-light mb-4">
+                            <h2 class="text-primary">4</h2>
+                        </div>
+                        <p class="font-weight-semi-bold">Training</p>
+                        <p class="text-secondary">0% complete</p>
                     </div>
-                    <p class="font-weight-semi-bold">Deployment</p>
-                    <p class="text-secondary">0% complete</p>
+                    <div class="border-bottom border-secondary border-2 w-150 flex-grow-1 mt-20"></div>
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="dot dot-xxl bg-primary-color-light mb-4">
+                            <h2 class="text-primary">5</h2>
+                        </div>
+                        <p class="font-weight-semi-bold">Handoff</p>
+                        <p class="text-secondary">0% complete</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <h4 class="mb-10 mt-40 font-weight-bold" @appearAnimation>Tasks & Actions</h4>
-    <div class="card border-radius-6 clear-margin" @appearAnimation>
-        <div class="card-body">
-            <div class="action-card border border-radius-6 on-hover-shadow px-20 py-12 d-flex align-items-center gap-2 mb-12">
-                <div class="dot dot-xl bg-primary-color mr-12">
-                    <h3 class="text-white">1</h3>
-                </div>
-                <div class="flex-grow-1">
-                    <h4 class="font-weight-semi-bold text-large mb-4">Core HR</h4>
-                    <div class="d-flex align-items-center">
-                        <div class="w-110 mr-4">
-                            <progressbar [value]="100"></progressbar>
+    <div class="mt-12">
+        <div class="card border-radius-6 clear-margin" @appearAnimation>
+            <div class="card-body">
+                <h4 class="mb-20 font-weight-bold" @appearAnimation>Modules subscribed</h4>
+                <div class="on-hover-bg border border-radius-6 on-hover-shadow mb-12 overflow-hidden">
+                        <div class="d-flex align-items-center gap-2 px-20 py-12 cursor-pointer" (click)="isCoreHrExpanded = !isCoreHrExpanded" [ngClass]="{ 'bg-slate-10 border-bottom': isCoreHrExpanded }">
+                            <div class="dot dot-xl bg-primary-color-light mr-12">
+                                <i class="ki ki-org ki-lg text-primary-color"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h4 class="font-weight-semi-bold text-large mb-4">Core HR</h4>
+                                <div class="d-flex align-items-center">
+                                    <div class="w-110 mr-4">
+                                        <progressbar [value]="100"></progressbar>
+                                    </div>
+                                    <span class="ml-4">100% complete</span>
+                                </div>
+                            </div>
+                            <i class="ki ki-chevron-right ki-lg" [class.transform-90]="isCoreHrExpanded"></i>
                         </div>
-                        <span class="ml-4">100% complete</span>
+        
+                        <div *ngIf="isCoreHrExpanded" class="bg-primary px-20 py-12" @enterLeaveAnimation5>
+                            <div class="border bg-secondary border-radius-6 px-12 py-8 mb-12 d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-start gap-2">
+                                    <span class="dot dot-md-lg bg-primary-color mt-1">1</span>
+                                    <div>
+                                        <p class="text-large">Add leagal entity</p>
+                                        <p class="text-secondary text-small">The registered business name used in all employee documents.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="ki ki-check-circle-fill text-success"></i>
+                                        <span>Completed</span>
+                                    </div>
+                                    <button class="btn btn-secondary btn-sm bg-primary">View</button>
+                                </div>
+                            </div>
+                            <div class="border bg-secondary border-radius-6 px-12 py-8 mb-12 d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-start gap-2">
+                                    <span class="dot dot-md-lg bg-primary-color mt-1">2</span>
+                                    <div>
+                                        <p class="text-large">Add locations</p>
+                                        <p class="text-secondary text-small">Add your organisation's workspace locations.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="ki ki-check-circle-fill text-success"></i>
+                                        <span>Completed</span>
+                                    </div>
+                                    <button class="btn btn-secondary btn-sm bg-primary">View</button>
+                                </div>
+                            </div>
+                            <div class="border bg-secondary border-radius-6 px-12 py-8 mb-12 d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-start gap-2">
+                                    <span class="dot dot-md-lg bg-primary-color mt-1">3</span>
+                                    <div>
+                                        <p class="text-large">Add departments</p>
+                                        <p class="text-secondary text-small">Set up departments and sub-departments, assign department heads, etc.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="d-flex align-items-center gap-1">
+                                        <i class="ki ki-check-circle-fill text-success"></i>
+                                        <span>Completed</span>
+                                    </div>
+                                    <button class="btn btn-secondary btn-sm bg-primary">View</button>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="on-hover-bg border border-radius-6 on-hover-shadow mb-12 overflow-hidden">
+                    <div class="d-flex align-items-center gap-2 px-20 py-12 cursor-pointer" (click)="isPMSExpanded = !isPMSExpanded" [ngClass]="{ 'bg-slate-10 border-bottom': isPMSExpanded }">
+                        <div class="dot dot-xl bg-primary-color-light mr-12">
+                            <i class="ki ki-trendline-up ki-md text-primary-color"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h4 class="font-weight-semi-bold text-large mb-4">Performance management</h4>
+                            <div class="d-flex align-items-center">
+                                <div class="w-110 mr-4">
+                                    <progressbar [value]="0"></progressbar>
+                                </div>
+                                <span class="ml-4">0% complete</span>
+                            </div>
+                        </div>
+                        <i class="ki ki-chevron-right ki-lg" [class.transform-90]="isPMSExpanded"></i>
+                    </div>
+    
+                    <div *ngIf="isPMSExpanded" class="bg-primary px-20 py-12" @enterLeaveAnimation5>
+                        <div class="border bg-secondary border-radius-6 px-12 py-8 d-flex align-items-center justify-content-between gap-2 mb-12">
+                            <div class="d-flex align-items-start gap-2">
+                                <span class="dot dot-md-lg bg-primary-color mt-1">1</span>
+                                <div>
+                                    <p class="text-large">Configure goal settings</p>
+                                    <p class="text-secondary text-small">The registered business name used in all employee documents.</p>
+                                </div>
+                            </div>
+                            <a class="text-link text-primary-color" (click)="openGoalSettingsModal()">View policy</a>
+                        </div>
                     </div>
                 </div>
-                <i class="ki ki-chevron-right ki-lg"></i>
-            </div>
-            <div class="action-card border border-radius-6 on-hover-shadow px-20 py-12 d-flex align-items-center gap-2 mb-12">
-                <div class="dot dot-xl bg-light mr-12">
-                    <h3 class="text-secondary">2</h3>
-                </div>
-                <div class="flex-grow-1">
-                    <h4 class="font-weight-semi-bold text-large mb-4">Performance management</h4>
-                    <div class="d-flex align-items-center">
-                        <div class="w-110 mr-4">
-                            <progressbar [value]="0"></progressbar>
+                <div class="on-hover-bg border border-radius-6 on-hover-shadow mb-12 overflow-hidden">
+                    <div class="d-flex align-items-center gap-2 px-20 py-12 cursor-pointer" (click)="isPayrollExpanded = !isPayrollExpanded" [ngClass]="{ 'bg-slate-10 border-bottom': isPayrollExpanded }">
+                        <div class="dot dot-xl bg-primary-color-light mr-12">
+                            <i class="ki ki-dollar-screen ki-md text-primary-color"></i>
                         </div>
-                        <span class="ml-4">0% complete</span>
+                        <div class="flex-grow-1">
+                            <h4 class="font-weight-semi-bold text-large mb-4">Payroll</h4>
+                            <div class="d-flex align-items-center">
+                                <div class="w-110 mr-4">
+                                    <progressbar [value]="0"></progressbar>
+                                </div>
+                                <span class="ml-4">0% complete</span>
+                            </div>
+                        </div>
+                        <i class="ki ki-chevron-right ki-lg" [class.transform-90]="isPayrollExpanded"></i>
+                    </div>
+    
+                    <div *ngIf="isPayrollExpanded" class="bg-primary px-20 py-12" @enterLeaveAnimation5>
+                        <div class="border bg-secondary border-radius-6 px-12 py-8 mb-12 d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-start gap-2">
+                                <span class="dot dot-md-lg bg-primary-color mt-1">1</span>
+                                <div>
+                                    <p class="text-large">Setup pay schedule</p>
+                                    <p class="text-secondary text-small">Define the pay schedule and it's end date</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="d-flex align-items-center gap-1">
+                                    <i class="ki ki-clock-fill text-warning"></i>
+                                    <span>Pending</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm bg-primary">View</button>
+                            </div>
+                        </div>
+                        <div class="border bg-secondary border-radius-6 px-12 py-8 mb-12 d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-start gap-2">
+                                <span class="dot dot-md-lg bg-primary-color mt-1">2</span>
+                                <div>
+                                    <p class="text-large">Setup contributions and deductions</p>
+                                    <p class="text-secondary text-small">Enable the applicable statutory contributions and deductions</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="d-flex align-items-center gap-1">
+                                    <i class="ki ki-clock-fill text-warning"></i>
+                                    <span>Pending</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm bg-primary">View</button>
+                            </div>
+                        </div>
+                        <div class="border bg-secondary border-radius-6 px-12 py-8 mb-12 d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-start gap-2">
+                                <span class="dot dot-md-lg bg-primary-color mt-1">3</span>
+                                <div>
+                                    <p class="text-large">Setup salary structure</p>
+                                    <p class="text-secondary text-small">Setup the salary range and structure for employees</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="d-flex align-items-center gap-1">
+                                    <i class="ki ki-clock-fill text-warning"></i>
+                                    <span>Pending</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm bg-primary">View</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <i class="ki ki-chevron-right ki-lg"></i>
-            </div>
-            <div class="action-card border border-radius-6 on-hover-shadow px-20 py-12 d-flex align-items-center gap-2 mb-12">
-                <div class="dot dot-xl bg-light mr-12">
-                    <h3 class="text-secondary">3</h3>
-                </div>
-                <div class="flex-grow-1">
-                    <h4 class="font-weight-semi-bold text-large mb-4">Payroll</h4>
-                    <div class="d-flex align-items-center">
-                        <div class="w-110 mr-4">
-                            <progressbar [value]="0"></progressbar>
+                <div class="on-hover-bg border border-radius-6 on-hover-shadow mb-12 overflow-hidden">
+                    <div class="d-flex align-items-center gap-2 px-20 py-12 cursor-pointer" (click)="isTimeSheetExpanded = !isTimeSheetExpanded" [ngClass]="{ 'bg-slate-10 border-bottom': isTimeSheetExpanded }">
+                        <div class="dot dot-xl bg-light mr-12">
+                            <i class="ki ki-clipboard-list ki-md text-primary-color"></i>
                         </div>
-                        <span class="ml-4">0% complete</span>
+                        <div class="flex-grow-1">
+                            <h4 class="font-weight-semi-bold text-large mb-4">Timesheet</h4>
+                            <div class="d-flex align-items-center">
+                                <div class="w-110 mr-4">
+                                    <progressbar [value]="0"></progressbar>
+                                </div>
+                                <span class="ml-4">0% complete</span>
+                            </div>
+                        </div>
+                        <i class="ki ki-chevron-right ki-lg" [class.transform-90]="isTimeSheetExpanded"></i>
+                    </div>
+    
+                    <div *ngIf="isTimeSheetExpanded" class="bg-primary px-20 py-12" @enterLeaveAnimation5>
+                        <p class="text-secondary">No content to show</p>
                     </div>
                 </div>
-                <i class="ki ki-chevron-right ki-lg"></i>
-            </div>
-            <div class="action-card border border-radius-6 on-hover-shadow px-20 py-12 d-flex align-items-center gap-2 mb-12">
-                <div class="dot dot-xl bg-light mr-12">
-                    <h3 class="text-secondary">4</h3>
-                </div>
-                <div class="flex-grow-1">
-                    <h4 class="font-weight-semi-bold text-large mb-4">Timesheet</h4>
-                    <div class="d-flex align-items-center">
-                        <div class="w-110 mr-4">
-                            <progressbar [value]="0"></progressbar>
-                        </div>
-                        <span class="ml-4">0% complete</span>
-                    </div>
-                </div>
-                <i class="ki ki-chevron-right ki-lg"></i>
             </div>
         </div>
     </div>
-
+    
 </div>

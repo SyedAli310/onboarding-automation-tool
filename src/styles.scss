@@ -38,6 +38,13 @@
     }
 }
 
-.action-card:hover {
-    border-color: #5746AF !important;
+.selector {
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    
+    border-top: 10px solid #fff;
+    position: absolute;
+    bottom: -9px;
 }
