@@ -8,6 +8,7 @@ import { appearAnimation, enterLeaveAnimation5 } from '../shared/animations/anim
 import { SmartOnboardService } from './services/smart-onboard.service';
 import { ScheduleMeetingView } from './models/schedule-meeting-view.model';
 import { SowViewComponent } from '../sow-view/sow-view.component';
+import moment from 'moment';
 
 @Component({
   selector: 'app-smart-onboard-view',
@@ -35,6 +36,10 @@ export class SmartOnboardViewComponent implements OnInit {
         return !!localStorage.getItem('meetingId');
     }
 
+    get meetingStart() {
+        return !!localStorage.getItem('meetingStartTime') ? localStorage.getItem('meetingStartTime') : null;
+    }
+
     constructor(
         private modalService: BsModalService,
         private toastService: HotToastService,
@@ -53,7 +58,7 @@ export class SmartOnboardViewComponent implements OnInit {
                 next: (response) => {
                     this.scheduleMeetingModalRef.hide();
                     this.toastService.success('Meeting scheduled successfully');
-                    this.saveMeetingDataToStorage(response?.joinUrl, response?.meetingId);
+                    this.saveMeetingDataToStorage(response?.joinUrl, response?.meetingId, scheduleMeetingView.startTime);
                 },
                 error: (error) => {
                     this.toastService.error(error?.message ?? 'Error while scheduling meeting');
@@ -88,9 +93,10 @@ export class SmartOnboardViewComponent implements OnInit {
         });
     }
 
-    saveMeetingDataToStorage(joinUrl: string, meetingId: string) {
+    saveMeetingDataToStorage(joinUrl: string, meetingId: string, startTime: string) {
         localStorage.setItem('joinUrl', joinUrl);
         localStorage.setItem('meetingId', meetingId);
+        localStorage.setItem('meetingStartTime', startTime);
     }
 
     openScheduleMeetingModal() {
@@ -105,6 +111,10 @@ export class SmartOnboardViewComponent implements OnInit {
 
         this.modalService.show(SowViewComponent, { initialState, class: 'right-modal right-modal-600', ignoreBackdropClick: true});
     }
+
+    formatDate(isoString: string): string {
+        return moment(isoString).format("Do MMM YYYY (ddd), [at] hh:mm A");
+    } 
     
     openGoalSettingsModal() {
         this.modalService.show(GoalSettingsConfigComponent, { class: 'right-modal right-modal-600', ignoreBackdropClick: true, keyboard: false });

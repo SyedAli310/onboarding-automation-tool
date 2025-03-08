@@ -165,7 +165,7 @@
                 <button class="btn btn-primary btn-sm" (click)="openScheduleMeetingModal()">Schedule meeting</button>
                 <div class="d-flex align-items-center gap-1 mt-10" *ngIf="isMeetingIdStored">
                     <i class="ki ki-check-circle-fill text-success"></i>
-                    <p class="text-large">Meeting scheduled for 10th Mar 2025 (Mon), at 10:00 AM</p>
+                    <p class="text-large">Meeting scheduled for {{!!meetingStart ? formatDate(meetingStart): 'NA'}}</p>
                     <button class="btn btn-link btn-sm ml-8 d-flex align-items-center justify-content-center" [disabled]="isSoWExtractionInProgress" (click)="extractSoW()">
                         <span class="spinner spinner-dark mr-8" *ngIf="isSoWExtractionInProgress" role="status" @appearAnimation></span>
                         <span>Generate SoW</span>

@@ -2,11 +2,9 @@
     <h5 class="modal-title text-primary">Generated SoW through transcript</h5>
     <span class="ki ki-close icon-no-hover" (click)="closeModal()"></span>
 </div>
-<div class="modal-body">
+<div class="modal-body h-100-100 overflow-auto">
     <ng-container *ngIf="!!generatedSoW; else loadingTemplate">
         <div class="b-block h-100" [innerHtml]="generatedSoW | markdown"></div>
-
-        <p>test</p>
     </ng-container>
 </div>
 <!-- <div class="modal-footer">

@@ -190,6 +190,31 @@
             </div>
         </li>
     </ol>
+
+    <h3 class="mb-12">Advanced Objective Settings</h3>
+    <ol class="mb-20">
+        <li class="text-large mb-12">
+            <p>Should alignment be enabled, allowing child objectives to align with a parent objective?</p>
+            <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
+                <button class="d-flex align-items-center w-100px" dropdownToggle>
+                    <p class=" text-primary">{{objectiveSettings.isAlignmentEnabled ? 'Yes' : 'No'}}</p>
+                    <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
+                </button>
+                <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
+                    <li>
+                        <a class="dropdown-item">
+                            <p class="text-large">Yes</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item">
+                            <p class="text-large">No</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ol>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary btn-sm" (click)="closeModal()">Close</button>
