@@ -21,7 +21,8 @@ export class GoalSettingsConfigComponent {
     companyObjectiveManagerRoles = [];
     departmentObjectiveManagerRoles = [];
     individualObjectiveManagerRoles = [];
-
+    isEditMode: boolean = false;
+    
     constructor(
         public goalSettingsModalRef: BsModalRef,
         private toastService: HotToastService,

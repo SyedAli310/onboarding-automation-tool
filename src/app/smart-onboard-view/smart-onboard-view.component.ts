@@ -40,6 +40,10 @@ export class SmartOnboardViewComponent implements OnInit {
         return !!localStorage.getItem('meetingStartTime') ? localStorage.getItem('meetingStartTime') : null;
     }
 
+    get joinUrl() {
+        return !!localStorage.getItem('joinUrl') ? localStorage.getItem('joinUrl') : null;
+    }
+
     constructor(
         private modalService: BsModalService,
         private toastService: HotToastService,
@@ -117,7 +121,7 @@ export class SmartOnboardViewComponent implements OnInit {
     } 
     
     openGoalSettingsModal() {
-        this.modalService.show(GoalSettingsConfigComponent, { class: 'right-modal right-modal-600', ignoreBackdropClick: true, keyboard: false });
+        this.modalService.show(GoalSettingsConfigComponent, { class: 'right-modal right-modal-800', ignoreBackdropClick: true, keyboard: false });
     }
 }
 

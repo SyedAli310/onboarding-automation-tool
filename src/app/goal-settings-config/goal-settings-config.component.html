@@ -1,10 +1,10 @@
 <div class="modal-header bg-primary">
-    <h5 class="modal-title text-primary">Goal settings</h5>
+    <h4 class="modal-title text-primary">Goal settings policy</h4>
     <span class="ki ki-close icon-no-hover" (click)="closeModal()"></span>
 </div>
 <div class="modal-body h-100-100 overflow-auto">
-    <h3 class="mb-12">Goal terminology</h3>
-    <ol class="mb-20">
+    <h6 class="mb-12">Goal terminology</h6>
+    <ol>
         <li class="text-large mb-12">
             <p>Do you want to enable Sub-goals (or Key Results) for objectives?</p>
             <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
@@ -67,7 +67,8 @@
         </li>
     </ol>
 
-    <h3 class="mb-12">Objective Types and Visibility</h3>
+    <hr class="w-100 my-20">
+    <h6 class="mb-12">Objective Types and Visibility</h6>
     <ol>
         <li class="text-large mb-12">
             <p>For Individual Objectives, do you want them visible to everyone in the organization?</p>
@@ -191,8 +192,9 @@
         </li>
     </ol>
 
-    <h3 class="mb-12">Advanced Objective Settings</h3>
-    <ol class="mb-20">
+    <hr class="w-100 my-20">
+    <h6 class="mb-12">Advanced Objective Settings</h6>
+    <ol>
         <li class="text-large mb-12">
             <p>Should alignment be enabled, allowing child objectives to align with a parent objective?</p>
             <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
@@ -217,7 +219,13 @@
     </ol>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-secondary btn-sm" (click)="closeModal()">Close</button>
-    <button type="button" class="btn btn-primary btn-sm" (click)="saveGoalSettings()">Save changes</button>
+    <ng-container *ngIf="!isEditMode">
+        <button type="button" class="btn btn-secondary btn-sm" (click)="isEditMode = true">Edit</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="saveGoalSettings()">Verify</button>
+    </ng-container>
+    <ng-container *ngIf="isEditMode">
+        <button type="button" class="btn btn-secondary btn-sm" (click)="closeModal()">Close</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="saveGoalSettings()">Save & verify</button>
+    </ng-container>
 </div>
 
