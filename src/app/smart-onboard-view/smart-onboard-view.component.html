@@ -38,7 +38,7 @@
                     </div>
                     <div>
                         <p class="text-secondary text-uppercase text-x-small">Expiration</p>
-                        <p class="text-primary">Jun 14, 2026</p>
+                        <p class="text-primary">Feb 14, 2027</p>
                     </div>
                 </div>
                 <div class="d-flex align-items-center gap-2 w-250 mb-16">
@@ -47,7 +47,7 @@
                     </div>
                     <div>
                         <p class="text-secondary text-uppercase text-x-small">Billing start</p>
-                        <p class="text-primary">Jun 14, 2022</p>
+                        <p class="text-primary">Feb 14, 2025</p>
                     </div>
                 </div>
                 <div class="d-flex align-items-center gap-2 w-250 mb-16">
@@ -120,7 +120,7 @@
                 <div class="d-flex flex-column align-items-center">
                     <span class="selector"></span>
                     <div class="dot dot-xxl bg-primary-color mb-4">
-                        <h2 class="text-white">2</h2>
+                        <h4 class="text-white">2</h4>
                     </div>
                     <p class="font-weight-semi-bold">Configuration</p>
                     <p class="text-secondary">25% complete</p>
@@ -128,7 +128,7 @@
                 <div class="border-bottom border-secondary border-2 w-150 flex-grow-1 mt-20"></div>
                 <div class="d-flex flex-column align-items-center">
                     <div class="dot dot-xxl bg-primary-color-light mb-4">
-                        <h2 class="text-primary">3</h2>
+                        <h4 class="text-primary">3</h4>
                     </div>
                     <p class="font-weight-semi-bold">Testing</p>
                     <p class="text-secondary">0% complete</p>
@@ -136,7 +136,7 @@
                 <div class="border-bottom border-secondary border-2 w-150 flex-grow-1 mt-20"></div>
                 <div class="d-flex flex-column align-items-center">
                     <div class="dot dot-xxl bg-primary-color-light mb-4">
-                        <h2 class="text-primary">4</h2>
+                        <h4 class="text-primary">4</h4>
                     </div>
                     <p class="font-weight-semi-bold">Training</p>
                     <p class="text-secondary">0% complete</p>
@@ -144,7 +144,7 @@
                 <div class="border-bottom border-secondary border-2 w-150 flex-grow-1 mt-20"></div>
                 <div class="d-flex flex-column align-items-center">
                     <div class="dot dot-xxl bg-primary-color-light mb-4">
-                        <h2 class="text-primary">5</h2>
+                        <h4 class="text-primary">5</h4>
                     </div>
                     <p class="font-weight-semi-bold">Handoff</p>
                     <p class="text-secondary">0% complete</p>
@@ -158,7 +158,7 @@
     <div class="card border-radius-6 clear-margin" @appearAnimation>
         <div class="card-body">
             <div class="mb-20">
-                <h4 class="font-weight-bold" @appearAnimation>Schedule a Solutioning Meeting</h4>
+                <h4 class="font-weight-bold" @appearAnimation>Schedule a solutioning meeting</h4>
                 <p class="text-secondary">Align on the best solution for your needs. Schedule a meeting with our team to discuss your requirements and finalize the approach.</p>
             </div>
             <div class="mb-20">
@@ -172,7 +172,7 @@
                                 <span class="text-secondary text-small">You can join the meeting using <a href="{{joinUrl}}" class="text-link" target="_blank"><u>this link</u></a></span>
                             </div>
                         </div>
-                        <button class="btn btn-link btn-sm ml-8 d-flex align-items-center justify-content-center" [disabled]="isSoWExtractionInProgress" (click)="extractSoW()">
+                        <button class="btn btn-link btn-sm ml-8 d-flex align-items-center justify-content-center" [disabled]="isSoWExtractionInProgress || generatedSoW?.trim()?.length" (click)="extractSoW()">
                             <span class="spinner spinner-dark mr-8" *ngIf="isSoWExtractionInProgress" role="status" @appearAnimation></span>
                             <i class="ki ki-star-sparkle text-primary-color mr-4"></i>
                             <span>Generate SoW</span>
@@ -186,7 +186,7 @@
             <div class="d-flex align-items-center justify-content-between gap-2 mb-20">
                 <h4 class="font-weight-bold" @appearAnimation>Modules subscribed</h4>
                 <span tooltip="Viewable after SoW is generated." [isDisabled]="generatedSoW?.trim()?.length">
-                    <a class="text-link" [ngClass]="{'opacity-50 pointer-events-none': !generatedSoW?.trim()?.length}" (click)="openSoWViewModal()">View full SoW</a>
+                    <a class="text-link" [ngClass]="{'opacity-50 pointer-events-none': !generatedSoW?.trim()?.length}" (click)="openSoWViewModal()">View transcript citations</a>
                 </span>
             </div>
 
@@ -213,7 +213,7 @@
                         <div class="d-flex align-items-start gap-2">
                             <span class="dot dot-md-lg bg-primary-color mt-1">1</span>
                             <div>
-                                <p class="text-large">Add leagal entity</p>
+                                <p class="text-large">Add legal entity</p>
                                 <p class="text-secondary text-small">The registered business name used in all employee documents.</p>
                             </div>
                         </div>
@@ -287,7 +287,7 @@
                                 <p class="text-secondary text-small">Setting up objective methodology & timeframes.</p>
                             </div>
                         </div>
-                        <a class="text-link text-primary-color" (click)="openGoalSettingsModal()">Verify customer policy</a>
+                        <a class="text-link text-primary-color" (click)="openGoalSettingsModal()">Verify SoW</a>
                     </div>
                     <div class="border bg-secondary border-radius-6 px-12 py-8 d-flex align-items-center justify-content-between gap-2 mb-12">
                         <div class="d-flex align-items-start gap-2">
@@ -297,7 +297,7 @@
                                 <p class="text-secondary text-small">Setting up reviews & rating scale configuration.</p>
                             </div>
                         </div>
-                        <a class="text-link text-primary-color">Verify customer policy</a>
+                        <a class="text-link text-primary-color">Verify SoW</a>
                     </div>
                 </div>
             </div>

@@ -129,7 +129,10 @@ export class SmartOnboardViewComponent implements OnInit {
     } 
     
     openGoalSettingsModal() {
-        this.modalService.show(GoalSettingsConfigComponent, { class: 'right-modal right-modal-800', ignoreBackdropClick: true, keyboard: false });
+        const initialState = {
+            generatedSoW: this.generatedSoW
+        }
+        this.modalService.show(GoalSettingsConfigComponent, { initialState, class: 'right-modal right-modal-800', ignoreBackdropClick: true, keyboard: false });
     }
 }
 

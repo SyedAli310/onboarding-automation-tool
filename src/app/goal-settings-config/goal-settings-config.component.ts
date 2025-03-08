@@ -6,12 +6,14 @@ import { HotToastService } from '@ngneat/hot-toast';
 
 import { ObjectiveSettings } from '../shared/models/objective-settings.model';
 import { EmployeeRole } from '../shared/models/enum.model';
+import { SmartOnboardService } from '../smart-onboard-view/services/smart-onboard.service';
 
 @Component({
   selector: 'app-goal-settings-config',
   templateUrl: './goal-settings-config.component.html',
 })
 export class GoalSettingsConfigComponent {
+    generatedSoW: string;
     objectiveSettings: ObjectiveSettings = new ObjectiveSettings({}); 
     goalTerminology = GoalTerminology;
     goalTerminologies: any;
@@ -22,15 +24,25 @@ export class GoalSettingsConfigComponent {
     departmentObjectiveManagerRoles = [];
     individualObjectiveManagerRoles = [];
     isEditMode: boolean = false;
-    
+
     constructor(
         public goalSettingsModalRef: BsModalRef,
         private toastService: HotToastService,
+        private _smartOnboardAPI: SmartOnboardService,
     ) {}
 
     ngOnInit(): void {
         this.goalTerminologies = this.goalTerminology.getAll();
         this.initializeRoles();
+
+        // this._smartOnboardAPI.getAIGeneratedGoalSettings(this.generatedSoW).subscribe({
+        //     next: (response) => {
+        //         console.log(response);
+        //     },
+        //     error: (error) => {
+        //         this.toastService.error(error?.message ?? 'Error getting goal settings');
+        //     }
+        // })
     }
 
     initializeRoles() {
