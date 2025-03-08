@@ -2,8 +2,9 @@
 .page-container {
     max-width: 80rem;
 }
+
 .btn-primary {
-    background-color:  #5746AF !important;
+    background-color: #5746AF !important;
 
     &:hover {
         background-color: rgb(87, 70, 175, 0.9) !important;
@@ -36,18 +37,20 @@
 }
 
 .progress {
-    height: 7px !important; /* Or any desired height */
+    height: 7px !important;
+
+    /* Or any desired height */
     &-bar {
         background-color: #5746AF !important;
     }
 }
 
 .selector {
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    
+
     border-top: 10px solid #fff;
     position: absolute;
     bottom: -9px;
@@ -57,7 +60,7 @@
     border-color: #5746AF !important;
 }
 
-.dropdown-menu > li {
+.dropdown-menu>li {
     margin: unset !important;
 }
 
@@ -130,10 +133,38 @@
     color: #000 !important;
     background-color: #fff !important;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1) !important;
-  
+
     & .hot-toast-close-btn {
-      background-image: url('./assets/images/close-lg.svg') !important;
-      color: #a09f9f !important;
-      background-size: 1em !important;
+        background-image: url('./assets/images/close-lg.svg') !important;
+        color: #a09f9f !important;
+        background-size: 1em !important;
     }
-  }
+}
+
+.bg-shape-1 {
+    position: fixed;
+    bottom: -100px;
+    right: -100px;
+    z-index: -1;
+    transform: rotate(140deg);
+    animation: appear 750ms ease-in forwards;
+}
+
+.bg-shape-2 {
+    position: fixed;
+    top: 60px;
+    left: -90px;
+    z-index: -1;
+    transform: rotate(-10deg);
+    animation: appear 750ms ease-in forwards;
+}
+
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 10%;
+    }
+}

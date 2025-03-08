@@ -163,13 +163,13 @@
             </div>
             <div class="mb-20">
                 <button class="btn btn-primary btn-sm" (click)="openScheduleMeetingModal()">Schedule meeting</button>
-                <div class="card clear-margin-x on-hover-shadow border-radius-6" style="width: max-content;" *ngIf="isMeetingIdStored">
+                <div class="card clear-margin-x border-radius-6" style="width: max-content;" *ngIf="isMeetingIdStored" @appearAnimation>
                     <div class="card-body d-flex align-items-center gap-2">
                         <div class="d-flex align-items-start gap-1">
                             <i class="ki ki-check-circle-fill text-success"></i>
                             <div>
                                 <p class="text-large">Meeting scheduled for {{!!meetingStart ? formatDate(meetingStart): 'NA'}}</p>
-                                <span class="text-secondary text-small">You can join the meeting using <a href="{{joinUrl}}" class="text-link"><u>this link</u></a></span>
+                                <span class="text-secondary text-small">You can join the meeting using <a href="{{joinUrl}}" class="text-link" target="_blank"><u>this link</u></a></span>
                             </div>
                         </div>
                         <button class="btn btn-link btn-sm ml-8 d-flex align-items-center justify-content-center" [disabled]="isSoWExtractionInProgress" (click)="extractSoW()">
@@ -185,7 +185,7 @@
 
             <div class="d-flex align-items-center justify-content-between gap-2 mb-20">
                 <h4 class="font-weight-bold" @appearAnimation>Modules subscribed</h4>
-                <span tooltip="Generate the SoW first to view this." [isDisabled]="generatedSoW?.trim()?.length">
+                <span tooltip="Viewable after SoW is generated." [isDisabled]="generatedSoW?.trim()?.length">
                     <a class="text-link" [ngClass]="{'opacity-50 pointer-events-none': !generatedSoW?.trim()?.length}" (click)="openSoWViewModal()">View full SoW</a>
                 </span>
             </div>
@@ -432,7 +432,13 @@
     <div class="modal-body">
         <div class="form-group">
             <label class="text-secondary" for="meeting-name">Meeting name</label>
-            <input type="text" id="meeting-name" class="form-control" [(ngModel)]="scheduleMeetingView.subject" placeholder="Ex: Onboarding configuration for PMS">
+            <input type="text" id="meeting-name" class="form-control" [class.border-danger]="isFormSubmitted && !scheduleMeetingView.subject?.trim()" [(ngModel)]="scheduleMeetingView.subject" placeholder="Ex: Onboarding configuration for PMS">
+        </div>
+        <div class="form-group">
+            <div class="flex-grow-1">
+                <label class="text-secondary" for="meeting-date">Date</label>
+                <input type="datetime" id="meeting-date" class="form-control" value="{{getDate()}}" placeholder="Start time" readonly>
+            </div>
         </div>
         <div class="form-group d-flex align-items-center gap-2">
             <div class="flex-grow-1">
@@ -446,7 +452,7 @@
         </div>
         <div>
             <label class="text-secondary" for="attendees">Attendees</label>
-            <input type="email" id="attendees" class="form-control" [(ngModel)]="scheduleMeetingView.attendees[0]" value="alizaidi310@gmail.com">
+            <input type="email" id="attendees" class="form-control" [class.border-danger]="isFormSubmitted && !scheduleMeetingView.attendees[0]" [(ngModel)]="scheduleMeetingView.attendees[0]" placeholder="Ex: mastergogo@crime.com">
         </div>
     </div>
     <div class="modal-footer">

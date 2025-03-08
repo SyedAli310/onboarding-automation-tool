@@ -25,7 +25,6 @@ export const appearAnimation = trigger(
     ])
 ]);
 
-
 export const flyInOut = trigger('flyInOut', [
     state('inactive', style({
         display: 'none',

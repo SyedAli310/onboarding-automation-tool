@@ -2,13 +2,13 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { HotToastService } from '@ngneat/hot-toast';
+import moment from 'moment';
 
 import { GoalSettingsConfigComponent } from '../goal-settings-config/goal-settings-config.component';
 import { appearAnimation, enterLeaveAnimation5 } from '../shared/animations/animations';
 import { SmartOnboardService } from './services/smart-onboard.service';
 import { ScheduleMeetingView } from './models/schedule-meeting-view.model';
 import { SowViewComponent } from '../sow-view/sow-view.component';
-import moment from 'moment';
 
 @Component({
   selector: 'app-smart-onboard-view',
@@ -25,6 +25,7 @@ export class SmartOnboardViewComponent implements OnInit {
     scheduleMeetingView: ScheduleMeetingView;
     isSchedulingInProgress: boolean = false;
     isSoWExtractionInProgress: boolean = false;
+    isFormSubmitted: boolean = false;
     generatedSoW: string | null;
     @ViewChild('scheduleMeetingModal', { static: true }) scheduleMeetingModal: TemplateRef<any>;
 
@@ -55,6 +56,7 @@ export class SmartOnboardViewComponent implements OnInit {
     }
 
     scheduleMeeting() {
+        this.isFormSubmitted = true;
         const scheduleMeetingView = {...this.scheduleMeetingView, startTime: this.scheduleMeetingView.startTime.toISOString(), endTime: this.scheduleMeetingView.endTime.toISOString()}
         if (this.isMeetingDataValid) {
             this.isSchedulingInProgress = true;
@@ -76,9 +78,11 @@ export class SmartOnboardViewComponent implements OnInit {
     extractSoW() {
         if (this.isMeetingIdStored) {
             this.isSoWExtractionInProgress = true;
+            const loadingToast = this.toastService.loading('AI is generating SoW... This may take a moment.');
             const storedMeetingId = localStorage.getItem('meetingId');
             this._smartOnboardAPI.extractSoWData(storedMeetingId).subscribe({
                 next: (response) => {
+                    loadingToast.close();
                     this.toastService.success('SoW generated successfully');
                     this.generatedSoW = response?.explanation ?? null;
                 },
@@ -95,6 +99,10 @@ export class SmartOnboardViewComponent implements OnInit {
             minute: "2-digit",
             hour12: true,
         });
+    }
+
+    getDate() {
+        return moment(new Date()).format('Do MMM, YYYY');
     }
 
     saveMeetingDataToStorage(joinUrl: string, meetingId: string, startTime: string) {
