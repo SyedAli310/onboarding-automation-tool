@@ -1,0 +1,20 @@
+<div class="modal-header bg-primary">
+    <h5 class="modal-title text-primary">Generated SoW through transcript</h5>
+    <span class="ki ki-close icon-no-hover" (click)="closeModal()"></span>
+</div>
+<div class="modal-body">
+    <ng-container *ngIf="!!generatedSoW; else loadingTemplate">
+        <div class="b-block h-100" [innerHtml]="generatedSoW | markdown"></div>
+
+        <p>test</p>
+    </ng-container>
+</div>
+<!-- <div class="modal-footer">
+    <button type="button" class="btn btn-secondary btn-sm" (click)="closeModal()">Close</button>
+</div> -->
+
+<ng-template #loadingTemplate>
+    <div class="w-100 h-300 d-flex align-items-center justify-content-center">
+        <span class="spinner spinner-dark spinner-lg"></span>
+    </div>
+</ng-template>

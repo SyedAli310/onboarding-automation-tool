@@ -199,3 +199,37 @@ export class ApprovalChainNotifyType extends Enum {
     static 1 = 'After Final Approval';
     static 2 = 'At Each Level of Approval';
 }
+
+export class EmployeeRole extends Enum {
+    static None = 0;
+    static ReportingManager = 1;
+    static ProjectManager = 2;
+    static ClientManager = 3;
+    static L2Manager = 4;
+    static DepartmentHead = 5;
+    static BusinessUnitHead = 6;
+    static PayrollAdmin = 7;
+    static ExpenseManager = 9;
+    static DottedLineManager = 10;
+    static AssetManager = 11;
+    static TravelDeskManager = 12;
+    static GroupTypeManager = 98;
+    static Employee = 99;
+    static Role = 100;
+
+    static 0 = 'None';
+    static 1 = 'Reporting Manager';
+    static 2 = 'Project Manager';
+    static 3 = 'Client Manager';
+    static 4 = 'Manager Of Manager';
+    static 5 = 'Department Head';
+    static 6 = 'BusinessUnit Head';
+    static 7 = 'Payroll Admin';
+    static 9 = 'Expense Manager';
+    static 10 = 'Dotted Line Manager';
+    static 11 = 'Asset Manager';
+    static 12 = 'Travel Desk Manager'
+    static 98 = 'Group type Manager';
+    static 99 = 'Employee';
+    static 100 = 'Role';
+}

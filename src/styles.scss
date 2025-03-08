@@ -4,6 +4,10 @@
 }
 .btn-primary {
     background-color:  #5746AF !important;
+
+    &:hover {
+        background-color: rgb(87, 70, 175, 0.9) !important;
+    }
 }
 
 .bg-primary-color {
@@ -48,3 +52,88 @@
     position: absolute;
     bottom: -9px;
 }
+
+.sub-topnav.nav .active a::after {
+    border-color: #5746AF !important;
+}
+
+.dropdown-menu > li {
+    margin: unset !important;
+}
+
+.btn-link {
+    color: #5746AF !important;
+    border-color: #5746AF !important;
+
+    &:hover {
+        background-color: rgb(87, 70, 175, 0.25) !important;
+        color: #5746AF !important;
+    }
+
+    &:disabled {
+        color: #5746AF !important;
+    }
+}
+
+.text-link {
+    color: #5746AF !important;
+}
+
+.modal-content {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+}
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+
+    &.spinner-light {
+        border: 3px solid rgba(255, 255, 255, .3);
+        border-top-color: #ffffff;
+    }
+
+    &.spinner-dark {
+        border: 3px solid rgba(0, 0, 0, 0.4);
+        border-top-color: #000000;
+    }
+
+    &.spinner-lg {
+        width: 50px !important;
+        height: 50px !important;
+    }
+}
+
+
+
+@keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+// ngneat toast styles
+.keka-toast {
+    border: 1px solid #d2cfcf !important;
+    border-radius: 8px !important;
+    margin-bottom: 50px !important;
+    color: #000 !important;
+    background-color: #fff !important;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1) !important;
+  
+    & .hot-toast-close-btn {
+      background-image: url('./assets/images/close-lg.svg') !important;
+      color: #a09f9f !important;
+      background-size: 1em !important;
+    }
+  }
