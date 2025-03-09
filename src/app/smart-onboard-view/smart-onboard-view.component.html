@@ -172,7 +172,7 @@
                                 <span class="text-secondary text-small">You can join the meeting using <a href="{{joinUrl}}" class="text-link" target="_blank"><u>this link</u></a></span>
                             </div>
                         </div>
-                        <button class="btn btn-link btn-sm ml-8 d-flex align-items-center justify-content-center" [disabled]="isSoWExtractionInProgress || generatedSoW?.trim()?.length" (click)="extractSoW()">
+                        <button class="btn btn-link btn-sm ml-8 d-flex align-items-center justify-content-center" [disabled]="isSoWExtractionInProgress || !canGenerateSoW" (click)="extractSoW()">
                             <span class="spinner spinner-dark mr-8" *ngIf="isSoWExtractionInProgress" role="status" @appearAnimation></span>
                             <i class="ki ki-star-sparkle text-primary-color mr-4"></i>
                             <span>Generate SoW</span>
@@ -287,7 +287,9 @@
                                 <p class="text-secondary text-small">Setting up objective methodology & timeframes.</p>
                             </div>
                         </div>
-                        <a class="text-link text-primary-color" (click)="openGoalSettingsModal()">Verify SoW</a>
+                        <span tooltip="Viewable after SoW is generated." [isDisabled]="isMeetingIdStored">
+                            <a class="text-link text-primary-color" [ngClass]="{'opacity-75 pointer-events-none': !isMeetingIdStored}" (click)="isMeetingIdStored && openGoalSettingsModal()">Verify SoW</a>
+                        </span>
                     </div>
                     <div class="border bg-secondary border-radius-6 px-12 py-8 d-flex align-items-center justify-content-between gap-2 mb-12">
                         <div class="d-flex align-items-start gap-2">
