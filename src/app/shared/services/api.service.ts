@@ -71,6 +71,7 @@ export class ApiService {
         const headers: { [name: string]: string } = {};
         headers['Content-Type'] = 'application/json; charset=utf-8';
         headers['X-Requested-With'] = 'XMLHttpRequest';
+        headers['Authorization'] = `Bearer ${window.localStorage.getItem('access_token')}`
         return new HttpHeaders(headers);
     }
 

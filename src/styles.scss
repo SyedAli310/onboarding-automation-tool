@@ -78,6 +78,14 @@
     }
 }
 
+.dropdown .dropdown-menu .dropdown-item.active {
+    background-color: rgb(87, 70, 175, 0.25) !important;
+}
+
+.dropdown .dropdown-menu .dropdown-item.active:hover {
+    background-color: rgb(87, 70, 175, 0.25) !important;
+}
+
 .text-link {
     color: #5746AF !important;
 }

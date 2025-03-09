@@ -8,7 +8,7 @@ export class ObjectiveLevelSettings {
     constructor(args) {
         this.companyObjectivesConfig = args.companyObjectivesConfig || new ObjectiveLevelConfig({});
         this.individualObjectivesConfig = args.individualObjectivesConfig || new IndividualObjectiveLevelConfig({});
-        this.groupObjectivesConfig = args.groupObjectivesConfig || [];
+        this.groupObjectivesConfig = args.groupObjectivesConfig || [new GroupObjectiveLevelConfig({})];
     }
 }
 
@@ -22,7 +22,7 @@ export class ObjectiveLevelConfig {
         this.isEnabled = args.isEnabled;
         this.isVisibleToEveryone = args.isVisibleToEveryone;
         this.canManageSelfObjectives = args.canManageSelfObjectives;
-        this.managers = args.managers;
+        this.managers = args?.managers ?? [];
     }
 }
 

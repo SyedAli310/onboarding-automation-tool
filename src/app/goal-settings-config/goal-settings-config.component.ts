@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { GoalTerminology, ObjectiveManagerType } from '../shared/models/enums';
+import { GoalTerminology, ObjectiveManagerType, WeightageType } from '../shared/models/enums';
 
 import { HotToastService } from '@ngneat/hot-toast';
 
 import { ObjectiveSettings } from '../shared/models/objective-settings.model';
 import { EmployeeRole } from '../shared/models/enum.model';
 import { SmartOnboardService } from '../smart-onboard-view/services/smart-onboard.service';
+import { GroupObjectiveLevelConfig, IndividualObjectiveLevelConfig, ObjectiveLevelConfig, ObjectiveManager } from '../shared/models/objective-level-setting.model';
 
 @Component({
   selector: 'app-goal-settings-config',
@@ -16,6 +17,7 @@ export class GoalSettingsConfigComponent {
     generatedSoW: string;
     objectiveSettings: ObjectiveSettings = new ObjectiveSettings({}); 
     goalTerminology = GoalTerminology;
+    weightageType = WeightageType;
     goalTerminologies: any;
     isFormSubmitted: boolean;
     managerRole = EmployeeRole;
@@ -35,14 +37,14 @@ export class GoalSettingsConfigComponent {
         this.goalTerminologies = this.goalTerminology.getAll();
         this.initializeRoles();
 
-        // this._smartOnboardAPI.getAIGeneratedGoalSettings(this.generatedSoW).subscribe({
-        //     next: (response) => {
-        //         console.log(response);
-        //     },
-        //     error: (error) => {
-        //         this.toastService.error(error?.message ?? 'Error getting goal settings');
-        //     }
-        // })
+        this._smartOnboardAPI.getAIGeneratedGoalSettings(this.generatedSoW).subscribe({
+            next: (response) => {
+                console.log(response);
+            },
+            error: (error) => {
+                this.toastService.error(error?.message ?? 'Error getting goal settings');
+            }
+        })
     }
 
     initializeRoles() {
@@ -57,6 +59,33 @@ export class GoalSettingsConfigComponent {
         this.departmentObjectiveManagerRoles = this.roles;
         this.individualObjectiveManagerRoles = this.roles;
     }
+
+    handleManagerSelection(manager: any, type: string) {
+        let config: IndividualObjectiveLevelConfig | GroupObjectiveLevelConfig | ObjectiveLevelConfig = type === 'INDIVIDUAL' ? this.objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig : 
+            type === 'DEPARTMENT' ? this.objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0] :
+            type === 'COMPANY' ? this.objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig : null;
+
+        config.managers.map(m => m.objectiveManagerType).includes(manager.type) ?
+        config.managers = config.managers.filter(m => m.objectiveManagerType !== manager.type) :
+        config.managers.push({
+            objectiveManagerType: manager.type,
+            managerName: manager.name,
+            managerId: null,
+            managerProfileImageUrl: null
+        });
+    }
+
+    isManagerSelected(manager: any, type: string) {
+        let config: IndividualObjectiveLevelConfig | GroupObjectiveLevelConfig | ObjectiveLevelConfig = type === 'INDIVIDUAL' ? this.objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig : 
+        type === 'DEPARTMENT' ? this.objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0] :
+        type === 'COMPANY' ? this.objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig : null;
+
+        return config.managers.map(m => m.objectiveManagerType).includes(manager.type);
+    }
+
+    getSelectedManagers(managers: Array<ObjectiveManager>) {
+        return managers.map(m => m.managerName).join(', ');
+    } 
 
     saveGoalSettings() {
         this.toastService.success('Goal settings saved successfully');

@@ -45,8 +45,8 @@ export class ObjectiveSettings {
         this.isKeyResultsMandatory = args.isKeyResultsMandatory;
         this.canUpdateObjectiveProgress = !this.useKeyResults || args.canUpdateObjectiveProgress;
         this.keyResultsWeightageType = args.keyResultsWeightageType;
-        this.maxObjectivesPerIndividual = +args.maxObjectivesPerIndividual;
-        this.minObjectivesPerIndividual = +args.minObjectivesPerIndividual;
+        this.maxObjectivesPerIndividual = +args?.maxObjectivesPerIndividual || 0;
+        this.minObjectivesPerIndividual = +args?.minObjectivesPerIndividual || 0;
         this.allowObjectivePriorities = args.allowObjectivePriorities;
         this.objectiveLevelSettings = args.objectiveLevelSettings || new ObjectiveLevelSettings({});
         this.isGoalSystemUpgraded = args.isGoalSystemUpgraded;
