@@ -5,7 +5,7 @@ export class GoalTerminology extends Enum {
     static Objective = 2;
     static KRA = 3;
     static Custom = 99;
-    static 1 = 'Goal';
+    static 1 = 'Goal and Sub-goal';
     static 2 = 'Objective and Key Result';
     static 3 = 'Key Responsibility Area';
     static 99 = 'Custom Terminology';
