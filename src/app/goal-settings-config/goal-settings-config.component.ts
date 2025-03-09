@@ -75,6 +75,12 @@ export class GoalSettingsConfigComponent {
         this._smartOnboardAPI.getAIGeneratedGoalSettings(this.generatedSoW).subscribe({
             next: (response) => {
                 this.objectiveSettings = new ObjectiveSettings(response);
+                this.objectiveSettings.goalTerminology = GoalTerminology.Objective;
+                this.objectiveSettings.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone = true;
+                this.objectiveSettings.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone = true;
+                this.objectiveSettings.objectiveLevelSettings.groupObjectivesConfig[0].isVisibleToEveryone = true;
+                this.objectiveSettings.isRollupEnabled = false;
+                this.objectiveSettings.canUpdateObjectiveProgress = false;
             },
             error: (error) => {
                 this.toastService.error(error?.message ?? 'Error getting goal settings', { position: 'top-right' });
