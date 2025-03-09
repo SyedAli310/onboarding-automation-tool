@@ -115,17 +115,17 @@
                 <p>For Department Objectives, do you want them visible to everyone in the organization?</p>
                 <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown [isDisabled]="!isEditMode" [ngClass]="{'opacity-75 pointer-events-none': !isEditMode}">
                     <button class="d-flex align-items-center w-100px" dropdownToggle>
-                        <p class=" text-primary">{{objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone ? 'Yes' : 'No'}}</p>
+                        <p class=" text-primary">{{objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0].isVisibleToEveryone ? 'Yes' : 'No'}}</p>
                         <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
                     </button>
                     <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
                         <li>
-                            <a class="dropdown-item" [class.active]="objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone = true">
+                            <a class="dropdown-item" [class.active]="objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0].isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0].isVisibleToEveryone = true">
                                 <p class="text-large">Yes</p>
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" [class.active]="!objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone = false">
+                            <a class="dropdown-item" [class.active]="!objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0].isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0].isVisibleToEveryone = false">
                                 <p class="text-large">No</p>
                             </a>
                         </li>
