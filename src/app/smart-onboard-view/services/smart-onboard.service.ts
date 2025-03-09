@@ -12,7 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class SmartOnboardService extends ApiService {
     private BACKEND_URL = 'https://customer-onboarding-ajhrbjhddwasgpcf.centralus-01.azurewebsites.net';
-    private KEKA_URL = 'https://saisrik.kekad.com/k/default/api';
+    private KEKA_URL = 'https://sharmila.kekad.com/k/default/api';
 
     private httpHeader: HttpHeaders;
 
