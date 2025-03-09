@@ -130,9 +130,70 @@ export class SmartOnboardViewComponent implements OnInit {
     
     openGoalSettingsModal() {
         const initialState = {
-            generatedSoW: this.generatedSoW
+            generatedSoW: this.generatedSoW,
+            onSave: () => this.initializeConfetti()
         }
         this.modalService.show(GoalSettingsConfigComponent, { initialState, class: 'right-modal right-modal-800', ignoreBackdropClick: true, keyboard: false });
+    }
+
+    initializeConfetti(): void {
+        const confettiCanvas = document.getElementById('confetti-canvas') as HTMLCanvasElement;
+        if (!confettiCanvas) {
+            return;
+        }
+        const ctx = confettiCanvas.getContext('2d');
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+
+        const confettis: any[] = [];
+        const colors = ['#FF007A', '#7A00FF', '#00FF7A', '#FFD700', '#00D4FF'];
+
+        for (let i = 0; i < 150; i++) {
+            this.createConfetti(confettis, confettiCanvas, colors);
+        }
+
+        setTimeout(() => {
+            this.animateConfetti(ctx, confettis, confettiCanvas);
+        }, 800);
+    }
+
+    private createConfetti(confettis: any[], canvas: HTMLCanvasElement, colors: string[]): void {
+        confettis.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height - canvas.height,
+            size: Math.random() * 15 + 10,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            speedX: Math.random() * 3 - 1.5,
+            speedY: Math.random() * 5 + 2,
+        });
+    }
+
+    private animateConfetti(ctx: CanvasRenderingContext2D | null, confettis: any[], canvas: HTMLCanvasElement): void {
+        if (!ctx) return;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confettis.forEach((confetti, index) => {
+            confetti.x += confetti.speedX;
+            confetti.y += confetti.speedY;
+
+            ctx.save();
+            ctx.translate(confetti.x, confetti.y);
+
+            const width = confetti.size;
+            const height = width / 2;
+
+            ctx.fillStyle = confetti.color;
+            ctx.fillRect(-width / 2, -height / 2, width, height);
+            ctx.restore();
+
+            if (confetti.y > canvas.height) {
+                confettis.splice(index, 1);
+            }
+        });
+
+        if (confettis.length > 0) {
+            requestAnimationFrame(() => this.animateConfetti(ctx, confettis, canvas)); // Use `this` here as well.
+        }
     }
 }
 

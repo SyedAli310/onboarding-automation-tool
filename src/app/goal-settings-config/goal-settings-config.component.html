@@ -3,279 +3,288 @@
     <span class="ki ki-close icon-no-hover" (click)="closeModal()"></span>
 </div>
 <div class="modal-body h-100-100 overflow-auto">
-    <h6 class="mb-12">Goal terminology</h6>
-    <ol>
-        <li class="text-large mb-12">
-            <p>Do you want to enable Sub-goals (or Key Results) for objectives?</p>
-            <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
-                <button class="d-flex align-items-center w-100px" dropdownToggle>
-                    <p class=" text-primary">{{objectiveSettings.useKeyResults ? 'Yes' : 'No'}}</p>
-                    <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
-                </button>
-                <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
-                    <li>
-                        <a class="dropdown-item" [class.active]="objectiveSettings.useKeyResults" (click)="objectiveSettings.useKeyResults = true">
-                            <p class="text-large">Yes</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" [class.active]="!objectiveSettings.useKeyResults" (click)="objectiveSettings.useKeyResults = false">
-                            <p class="text-large">No</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-
-        <li class="text-large mb-12">
-            <p>Should sub-goals (or Key Results) be mandatory whenever an objective is created?</p>
-            <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
-                <button class="d-flex align-items-center w-100px" dropdownToggle>
-                    <p class=" text-primary">{{objectiveSettings.isKeyResultsMandatory ? 'Yes' : 'No'}}</p>
-                    <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
-                </button>
-                <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
-                    <li>
-                        <a class="dropdown-item" [class.active]="objectiveSettings.isKeyResultsMandatory" (click)="objectiveSettings.isKeyResultsMandatory = true">
-                            <p class="text-large">Yes</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" [class.active]="!objectiveSettings.isKeyResultsMandatory" (click)="objectiveSettings.isKeyResultsMandatory = false">
-                            <p class="text-large">No</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="text-large mb-12">
-            <p>Which terminology do you prefer to represent your objectives and sub-elements?</p>
-            <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
-                <button class="d-flex align-items-center w-200" dropdownToggle>
-                    <p class=" text-primary">{{goalTerminology.getById(objectiveSettings.goalTerminology)}}</p>
-                    <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
-                </button>
-                <ul class="dropdown-menu w-200" aria-labelledby="menu" *dropdownMenu>
-                    <li *ngFor="let terminology of goalTerminologies">
-                        <a class="dropdown-item" [class.active]="objectiveSettings.goalTerminology === terminology.id" (click)="objectiveSettings.goalTerminology = terminology.id">
-                            <p class="text-large">{{terminology.title}}</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <!-- <input type="text" class="form-control h-30"> -->
-        </li>
-    </ol>
-
-    <hr class="w-100 my-20">
-    <h6 class="mb-12">Objective Types and Visibility</h6>
-    <ol>
-        <li class="text-large mb-12">
-            <p>For Individual Objectives, do you want them visible to everyone in the organization?</p>
-            <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
-                <button class="d-flex align-items-center w-100px" dropdownToggle>
-                    <p class=" text-primary">{{objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone ? 'Yes' : 'No'}}</p>
-                    <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
-                </button>
-                <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
-                    <li>
-                        <a class="dropdown-item" [class.active]="objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone = true">
-                            <p class="text-large">Yes</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" [class.active]="!objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone = false">
-                            <p class="text-large">No</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="text-large mb-12">
-            <p>Who can create and manage Individual Objectives?</p>
-            <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
-                <button class="d-flex align-items-center w-200" dropdownToggle>
-                    <p class="text-primary">
-                        <span class="text-truncate-1 text-break" *ngIf="objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig?.managers?.length" title="{{getSelectedManagers(objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig?.managers)}}">{{getSelectedManagers(objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig?.managers)}}</span>
-                        <span *ngIf="!objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig?.managers?.length" class="text-secondary">NA</span>
-                    </p>
-                    <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
-                </button>
-                <ul class="dropdown-menu w-200" aria-labelledby="menu" *dropdownMenu (click)="$event.stopPropagation()">
-                    <li *ngFor="let manager of individualObjectiveManagerRoles">
-                        <a class="dropdown-item" (click)="handleManagerSelection(manager, 'INDIVIDUAL')" [class.active]="isManagerSelected(manager, 'INDIVIDUAL')">
-                            <p class="text-large">{{manager.name}}</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="text-large mb-12">
-            <p>For Department Objectives, do you want them visible to everyone in the organization?</p>
-            <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
-                <button class="d-flex align-items-center w-100px" dropdownToggle>
-                    <p class=" text-primary">{{objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone ? 'Yes' : 'No'}}</p>
-                    <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
-                </button>
-                <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
-                    <li>
-                        <a class="dropdown-item" [class.active]="objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone = true">
-                            <p class="text-large">Yes</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" [class.active]="!objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone = false">
-                            <p class="text-large">No</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="text-large mb-12">
-            <p>Who can create and manage Department Objectives?</p>
-            <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
-                <button class="d-flex align-items-center w-200" dropdownToggle>
-                    <p class="text-primary">
-                        <span class="text-truncate-1 text-break" *ngIf="objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0]?.managers?.length" title="{{getSelectedManagers(objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0]?.managers)}}">{{getSelectedManagers(objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0]?.managers)}}</span>
-                        <span *ngIf="!objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0]?.managers?.length" class="text-secondary">NA</span>
-                    </p>
-                    <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
-                </button>
-                <ul class="dropdown-menu w-200" aria-labelledby="menu" *dropdownMenu (click)="$event.stopPropagation()">
-                    <li *ngFor="let manager of departmentObjectiveManagerRoles">
-                        <a class="dropdown-item" (click)="handleManagerSelection(manager, 'DEPARTMENT')" [class.active]="isManagerSelected(manager, 'DEPARTMENT')">
-                            <p class="text-large">{{manager.name}}</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="text-large mb-12">
-            <p>For Company Objectives, do you want them visible to everyone in the organization?</p>
-            <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
-                <button class="d-flex align-items-center w-100px" dropdownToggle>
-                    <p class=" text-primary">{{objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone ? 'Yes' : 'No'}}</p>
-                    <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
-                </button>
-                <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
-                    <li>
-                        <a class="dropdown-item" [class.active]="objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone = true">
-                            <p class="text-large">Yes</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" [class.active]="!objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone = false">
-                            <p class="text-large">No</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="text-large mb-12">
-            <p>Who can create and manage Company Objectives?</p>
-            <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
-                <button class="d-flex align-items-center w-200" dropdownToggle>
-                    <p class="text-primary">
-                        <span class="text-truncate-1 text-break" *ngIf="objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig?.managers?.length" title="{{getSelectedManagers(objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig?.managers)}}">{{getSelectedManagers(objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig?.managers)}}</span>
-                        <span *ngIf="!objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig?.managers?.length" class="text-secondary">NA</span>
-                    </p>
-                    <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
-                </button>
-                <ul class="dropdown-menu w-200" aria-labelledby="menu" *dropdownMenu (click)="$event.stopPropagation()">
-                    <li *ngFor="let manager of companyObjectiveManagerRoles">
-                        <a class="dropdown-item" (click)="handleManagerSelection(manager, 'COMPANY')" [class.active]="isManagerSelected(manager, 'COMPANY')">
-                            <p class="text-large">{{manager.name}}</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-    </ol>
-
-    <hr class="w-100 my-20">
-    <h6 class="mb-12">Advanced Objective Settings</h6>
-    <ol>
-        <li class="text-large mb-12">
-            <p>Should alignment be enabled, allowing child objectives to align with a parent objective?</p>
-            <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
-                <button class="d-flex align-items-center w-100px" dropdownToggle>
-                    <p class=" text-primary">{{objectiveSettings.isAlignmentEnabled ? 'Yes' : 'No'}}</p>
-                    <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
-                </button>
-                <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
-                    <li>
-                        <a class="dropdown-item" [class.active]="objectiveSettings.isAlignmentEnabled" (click)="objectiveSettings.isAlignmentEnabled = true">
-                            <p class="text-large">Yes</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" [class.active]="!objectiveSettings.isAlignmentEnabled" (click)="objectiveSettings.isAlignmentEnabled = false">
-                            <p class="text-large">No</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="text-large mb-12">
-            <p>Should child objectives contribute to the parent objective's progress automatically?</p>
-            <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
-                <button class="d-flex align-items-center w-100px" dropdownToggle>
-                    <p class=" text-primary">{{objectiveSettings.isRollupEnabled ? 'Yes' : 'No'}}</p>
-                    <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
-                </button>
-                <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
-                    <li>
-                        <a class="dropdown-item" [class.active]="objectiveSettings.isRollupEnabled" (click)="objectiveSettings.isRollupEnabled = true">
-                            <p class="text-large">Yes</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" [class.active]="!objectiveSettings.isRollupEnabled" (click)="objectiveSettings.isRollupEnabled = false">
-                            <p class="text-large">No</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="text-large mb-12">
-            <p>If there are sub-goals/key results, should they override the main objective's progress?</p>
-            <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown>
-                <button class="d-flex align-items-center w-100px" dropdownToggle>
-                    <p class=" text-primary">{{objectiveSettings.canUpdateObjectiveProgress ? 'Yes' : 'No'}}</p>
-                    <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
-                </button>
-                <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
-                    <li>
-                        <a class="dropdown-item" [class.active]="objectiveSettings.canUpdateObjectiveProgress" (click)="objectiveSettings.canUpdateObjectiveProgress = true">
-                            <p class="text-large">Yes</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" [class.active]="!objectiveSettings.canUpdateObjectiveProgress" (click)="objectiveSettings.canUpdateObjectiveProgress = false">
-                            <p class="text-large">No</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="text-large mb-12">
-            <p>What is the minimum number of objectives an employee should have during a review period?</p>
-            <input type="number" class="form-control w-100px h-30" value="objectiveSettings.minObjectivesPerIndividual" (input)="objectiveSettings.minObjectivesPerIndividual = +$event.target.value">
-        </li>
-        <li class="text-large mb-12">
-            <p>What is the maximum number of objectives an employee should have during a review period?</p>
-            <input type="number" class="form-control w-100px h-30" value="objectiveSettings.maxObjectivesPerIndividual" (input)="objectiveSettings.maxObjectivesPerIndividual = +$event.target.value">
-        </li>
-    </ol>
+    <div *ngIf="!isLoading; else loaderTemplate" @appearAnimation>
+        <h6 class="mb-12">Goal terminology</h6>
+        <ol>
+            <li class="text-large mb-12">
+                <p>Do you want to enable Sub-goals (or Key Results) for objectives?</p>
+                <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown [isDisabled]="!isEditMode" [ngClass]="{'opacity-75 pointer-events-none': !isEditMode}">
+                    <button class="d-flex align-items-center w-100px" dropdownToggle>
+                        <p class=" text-primary">{{objectiveSettings.useKeyResults ? 'Yes' : 'No'}}</p>
+                        <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
+                    </button>
+                    <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
+                        <li>
+                            <a class="dropdown-item" [class.active]="objectiveSettings.useKeyResults" (click)="objectiveSettings.useKeyResults = true">
+                                <p class="text-large">Yes</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" [class.active]="!objectiveSettings.useKeyResults" (click)="objectiveSettings.useKeyResults = false">
+                                <p class="text-large">No</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+    
+            <li class="text-large mb-12">
+                <p>Should sub-goals (or Key Results) be mandatory whenever an objective is created?</p>
+                <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown [isDisabled]="!isEditMode" [ngClass]="{'opacity-75 pointer-events-none': !isEditMode}">
+                    <button class="d-flex align-items-center w-100px" dropdownToggle>
+                        <p class=" text-primary">{{objectiveSettings.isKeyResultsMandatory ? 'Yes' : 'No'}}</p>
+                        <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
+                    </button>
+                    <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
+                        <li>
+                            <a class="dropdown-item" [class.active]="objectiveSettings.isKeyResultsMandatory" (click)="objectiveSettings.isKeyResultsMandatory = true">
+                                <p class="text-large">Yes</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" [class.active]="!objectiveSettings.isKeyResultsMandatory" (click)="objectiveSettings.isKeyResultsMandatory = false">
+                                <p class="text-large">No</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="text-large mb-12">
+                <p>Which terminology do you prefer to represent your objectives and sub-elements?</p>
+                <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown [isDisabled]="!isEditMode" [ngClass]="{'opacity-75 pointer-events-none': !isEditMode}">
+                    <button class="d-flex align-items-center w-200" dropdownToggle>
+                        <p class=" text-primary">{{goalTerminology.getById(objectiveSettings.goalTerminology)}}</p>
+                        <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
+                    </button>
+                    <ul class="dropdown-menu w-200" aria-labelledby="menu" *dropdownMenu>
+                        <li *ngFor="let terminology of goalTerminologies">
+                            <a class="dropdown-item" [class.active]="objectiveSettings.goalTerminology === terminology.id" (click)="objectiveSettings.goalTerminology = terminology.id">
+                                <p class="text-large">{{terminology.title}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- <input type="text" class="form-control h-30"> -->
+            </li>
+        </ol>
+    
+        <hr class="w-100 my-20">
+        <h6 class="mb-12">Objective Types and Visibility</h6>
+        <ol>
+            <li class="text-large mb-12">
+                <p>For Individual Objectives, do you want them visible to everyone in the organization?</p>
+                <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown [isDisabled]="!isEditMode" [ngClass]="{'opacity-75 pointer-events-none': !isEditMode}">
+                    <button class="d-flex align-items-center w-100px" dropdownToggle>
+                        <p class=" text-primary">{{objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone ? 'Yes' : 'No'}}</p>
+                        <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
+                    </button>
+                    <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
+                        <li>
+                            <a class="dropdown-item" [class.active]="objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone = true">
+                                <p class="text-large">Yes</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" [class.active]="!objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone = false">
+                                <p class="text-large">No</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="text-large mb-12">
+                <p>Who can create and manage Individual Objectives?</p>
+                <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown [isDisabled]="!isEditMode" [ngClass]="{'opacity-75 pointer-events-none': !isEditMode}">
+                    <button class="d-flex align-items-center w-200" dropdownToggle>
+                        <p class="text-primary">
+                            <span class="text-truncate-1 text-break" *ngIf="objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig?.managers?.length" title="{{getSelectedManagers(objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig?.managers)}}">{{getSelectedManagers(objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig?.managers)}}</span>
+                            <span *ngIf="!objectiveSettings?.objectiveLevelSettings.individualObjectivesConfig?.managers?.length" class="text-secondary">NA</span>
+                        </p>
+                        <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
+                    </button>
+                    <ul class="dropdown-menu w-200" aria-labelledby="menu" *dropdownMenu (click)="$event.stopPropagation()">
+                        <li *ngFor="let manager of individualObjectiveManagerRoles">
+                            <a class="dropdown-item" (click)="handleManagerSelection(manager, 'INDIVIDUAL')" [class.active]="isManagerSelected(manager, 'INDIVIDUAL')">
+                                <p class="text-large">{{manager.name}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="text-large mb-12">
+                <p>For Department Objectives, do you want them visible to everyone in the organization?</p>
+                <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown [isDisabled]="!isEditMode" [ngClass]="{'opacity-75 pointer-events-none': !isEditMode}">
+                    <button class="d-flex align-items-center w-100px" dropdownToggle>
+                        <p class=" text-primary">{{objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone ? 'Yes' : 'No'}}</p>
+                        <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
+                    </button>
+                    <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
+                        <li>
+                            <a class="dropdown-item" [class.active]="objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone = true">
+                                <p class="text-large">Yes</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" [class.active]="!objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig.isVisibleToEveryone = false">
+                                <p class="text-large">No</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="text-large mb-12">
+                <p>Who can create and manage Department Objectives?</p>
+                <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown [isDisabled]="!isEditMode" [ngClass]="{'opacity-75 pointer-events-none': !isEditMode}">
+                    <button class="d-flex align-items-center w-200" dropdownToggle>
+                        <p class="text-primary">
+                            <span class="text-truncate-1 text-break" *ngIf="objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0]?.managers?.length" title="{{getSelectedManagers(objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0]?.managers)}}">{{getSelectedManagers(objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0]?.managers)}}</span>
+                            <span *ngIf="!objectiveSettings?.objectiveLevelSettings.groupObjectivesConfig[0]?.managers?.length" class="text-secondary">NA</span>
+                        </p>
+                        <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
+                    </button>
+                    <ul class="dropdown-menu w-200" aria-labelledby="menu" *dropdownMenu (click)="$event.stopPropagation()">
+                        <li *ngFor="let manager of departmentObjectiveManagerRoles">
+                            <a class="dropdown-item" (click)="handleManagerSelection(manager, 'DEPARTMENT')" [class.active]="isManagerSelected(manager, 'DEPARTMENT')">
+                                <p class="text-large">{{manager.name}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="text-large mb-12">
+                <p>For Company Objectives, do you want them visible to everyone in the organization?</p>
+                <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown [isDisabled]="!isEditMode" [ngClass]="{'opacity-75 pointer-events-none': !isEditMode}">
+                    <button class="d-flex align-items-center w-100px" dropdownToggle>
+                        <p class=" text-primary">{{objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone ? 'Yes' : 'No'}}</p>
+                        <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
+                    </button>
+                    <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
+                        <li>
+                            <a class="dropdown-item" [class.active]="objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone = true">
+                                <p class="text-large">Yes</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" [class.active]="!objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone" (click)="objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone = false">
+                                <p class="text-large">No</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="text-large mb-12">
+                <p>Who can create and manage Company Objectives?</p>
+                <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown [isDisabled]="!isEditMode" [ngClass]="{'opacity-75 pointer-events-none': !isEditMode}">
+                    <button class="d-flex align-items-center w-200" dropdownToggle>
+                        <p class="text-primary">
+                            <span class="text-truncate-1 text-break" *ngIf="objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig?.managers?.length" title="{{getSelectedManagers(objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig?.managers)}}">{{getSelectedManagers(objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig?.managers)}}</span>
+                            <span *ngIf="!objectiveSettings?.objectiveLevelSettings.companyObjectivesConfig?.managers?.length" class="text-secondary">NA</span>
+                        </p>
+                        <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
+                    </button>
+                    <ul class="dropdown-menu w-200" aria-labelledby="menu" *dropdownMenu (click)="$event.stopPropagation()">
+                        <li *ngFor="let manager of companyObjectiveManagerRoles">
+                            <a class="dropdown-item" (click)="handleManagerSelection(manager, 'COMPANY')" [class.active]="isManagerSelected(manager, 'COMPANY')">
+                                <p class="text-large">{{manager.name}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ol>
+    
+        <hr class="w-100 my-20">
+        <h6 class="mb-12">Advanced Objective Settings</h6>
+        <ol>
+            <li class="text-large mb-12">
+                <p>Should alignment be enabled, allowing child objectives to align with a parent objective?</p>
+                <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown [isDisabled]="!isEditMode" [ngClass]="{'opacity-75 pointer-events-none': !isEditMode}">
+                    <button class="d-flex align-items-center w-100px" dropdownToggle>
+                        <p class=" text-primary">{{objectiveSettings.isAlignmentEnabled ? 'Yes' : 'No'}}</p>
+                        <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
+                    </button>
+                    <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
+                        <li>
+                            <a class="dropdown-item" [class.active]="objectiveSettings.isAlignmentEnabled" (click)="objectiveSettings.isAlignmentEnabled = true">
+                                <p class="text-large">Yes</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" [class.active]="!objectiveSettings.isAlignmentEnabled" (click)="objectiveSettings.isAlignmentEnabled = false">
+                                <p class="text-large">No</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="text-large mb-12">
+                <p>Should child objectives contribute to the parent objective's progress automatically?</p>
+                <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown [isDisabled]="!isEditMode" [ngClass]="{'opacity-75 pointer-events-none': !isEditMode}">
+                    <button class="d-flex align-items-center w-100px" dropdownToggle>
+                        <p class=" text-primary">{{objectiveSettings.isRollupEnabled ? 'Yes' : 'No'}}</p>
+                        <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
+                    </button>
+                    <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
+                        <li>
+                            <a class="dropdown-item" [class.active]="objectiveSettings.isRollupEnabled" (click)="objectiveSettings.isRollupEnabled = true">
+                                <p class="text-large">Yes</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" [class.active]="!objectiveSettings.isRollupEnabled" (click)="objectiveSettings.isRollupEnabled = false">
+                                <p class="text-large">No</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="text-large mb-12">
+                <p>If there are sub-goals/key results, should they override the main objective's progress?</p>
+                <div class="dropdown dropdown-custom dropdown-custom-xs mt-4" dropdown [isDisabled]="!isEditMode" [ngClass]="{'opacity-75 pointer-events-none': !isEditMode}">
+                    <button class="d-flex align-items-center w-100px" dropdownToggle>
+                        <p class=" text-primary">{{objectiveSettings.canUpdateObjectiveProgress ? 'Yes' : 'No'}}</p>
+                        <span class="ki ki-arrow-dropdown icon ml-auto align-self-center"></span>
+                    </button>
+                    <ul class="dropdown-menu w-100px" aria-labelledby="menu" *dropdownMenu>
+                        <li>
+                            <a class="dropdown-item" [class.active]="objectiveSettings.canUpdateObjectiveProgress" (click)="objectiveSettings.canUpdateObjectiveProgress = true">
+                                <p class="text-large">Yes</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" [class.active]="!objectiveSettings.canUpdateObjectiveProgress" (click)="objectiveSettings.canUpdateObjectiveProgress = false">
+                                <p class="text-large">No</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="text-large mb-12">
+                <p>What is the minimum number of objectives an employee should have during a review period?</p>
+                <input type="number" class="form-control w-100px h-30" [disabled]="!isEditMode" [value]="objectiveSettings.minObjectivesPerIndividual" (input)="objectiveSettings.minObjectivesPerIndividual = +$event.target.value">
+            </li>
+            <li class="text-large mb-12">
+                <p>What is the maximum number of objectives an employee should have during a review period?</p>
+                <input type="number" class="form-control w-100px h-30" [disabled]="!isEditMode" [value]="objectiveSettings.maxObjectivesPerIndividual" (input)="objectiveSettings.maxObjectivesPerIndividual = +$event.target.value">
+            </li>
+        </ol>
+    </div>
 </div>
 <div class="modal-footer">
     <ng-container *ngIf="!isEditMode">
-        <button type="button" class="btn btn-secondary btn-sm" (click)="isEditMode = true">Edit</button>
-        <button type="button" class="btn btn-primary btn-sm" (click)="saveGoalSettings()">Verify</button>
+        <button type="button" class="btn btn-secondary btn-sm" [disabled]="isLoading" (click)="isEditMode = true">Edit</button>
+        <button type="button" class="btn btn-primary btn-sm" [disabled]="isLoading" (click)="saveGoalSettings()">Verify</button>
     </ng-container>
     <ng-container *ngIf="isEditMode">
-        <button type="button" class="btn btn-secondary btn-sm" (click)="closeModal()">Close</button>
-        <button type="button" class="btn btn-primary btn-sm" (click)="saveGoalSettings()">Save & verify</button>
+        <button type="button" class="btn btn-secondary btn-sm" [disabled]="isLoading" (click)="closeModal()">Close</button>
+        <button type="button" class="btn btn-primary btn-sm" [disabled]="isLoading" (click)="saveGoalSettings()">Save & verify</button>
     </ng-container>
 </div>
 
+
+<ng-template #loaderTemplate>
+    <div class="w-100 h-300 flex-column d-flex align-items-center justify-content-center">
+        <span class="spinner spinner-dark spinner-lg"></span>
+        <p class="text-large">Loading...</p>
+    </div>
+</ng-template>

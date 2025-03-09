@@ -8,13 +8,16 @@ import { ObjectiveSettings } from '../shared/models/objective-settings.model';
 import { EmployeeRole } from '../shared/models/enum.model';
 import { SmartOnboardService } from '../smart-onboard-view/services/smart-onboard.service';
 import { GroupObjectiveLevelConfig, IndividualObjectiveLevelConfig, ObjectiveLevelConfig, ObjectiveManager } from '../shared/models/objective-level-setting.model';
+import { appearAnimation } from '../shared/animations/animations';
 
 @Component({
   selector: 'app-goal-settings-config',
   templateUrl: './goal-settings-config.component.html',
+  animations: [appearAnimation]
 })
 export class GoalSettingsConfigComponent {
     generatedSoW: string;
+    onSave: Function;
     objectiveSettings: ObjectiveSettings = new ObjectiveSettings({}); 
     goalTerminology = GoalTerminology;
     weightageType = WeightageType;
@@ -26,6 +29,12 @@ export class GoalSettingsConfigComponent {
     departmentObjectiveManagerRoles = [];
     individualObjectiveManagerRoles = [];
     isEditMode: boolean = false;
+    isLoading: boolean = false;
+    isSaving: boolean = false;
+
+    get isMeetingIdStored() {
+        return !!localStorage.getItem('meetingId');
+    }
 
     constructor(
         public goalSettingsModalRef: BsModalRef,
@@ -36,15 +45,41 @@ export class GoalSettingsConfigComponent {
     ngOnInit(): void {
         this.goalTerminologies = this.goalTerminology.getAll();
         this.initializeRoles();
+        if (!this.generatedSoW) {
+            this.extractSoW();
+        } else {
+            this.getAIGeneratedObjectiveSettings();
+        }
+    }
 
+    extractSoW() {
+        if (this.isMeetingIdStored) {
+            this.isLoading = true;
+            const storedMeetingId = localStorage.getItem('meetingId');
+            this._smartOnboardAPI.extractSoWData(storedMeetingId).subscribe({
+                next: (response) => {
+                    this.generatedSoW = response?.explanation ?? null;
+                    this.isLoading = false;
+                    this.getAIGeneratedObjectiveSettings();
+                },
+                error: (error) => {
+                    this.toastService.error(error?.message || 'Error generating SoW', { position: 'top-right' });
+                    this.isLoading = false;
+                }
+            });
+        }
+    }
+
+    getAIGeneratedObjectiveSettings() {
+        this.isLoading = true;
         this._smartOnboardAPI.getAIGeneratedGoalSettings(this.generatedSoW).subscribe({
             next: (response) => {
-                console.log(response);
+                this.objectiveSettings = new ObjectiveSettings(response);
             },
             error: (error) => {
-                this.toastService.error(error?.message ?? 'Error getting goal settings');
+                this.toastService.error(error?.message ?? 'Error getting goal settings', { position: 'top-right' });
             }
-        })
+        }).add( () => this.isLoading = false);
     }
 
     initializeRoles() {
@@ -88,9 +123,18 @@ export class GoalSettingsConfigComponent {
     } 
 
     saveGoalSettings() {
-        this.toastService.success('Goal settings saved successfully');
+        this._smartOnboardAPI.saveGoalSettings(this.objectiveSettings).subscribe({
+            next: () => {
+                this.toastService.success('Goal settings updated successfully');
+                this.closeModal();
+                this.onSave && this.onSave();
+            },
+            error: (error) => {
+                this.toastService.error(error?.message ?? 'Error saving goal settings', { position: 'top-right' });
+            }
+        });
     }
-
+    
     closeModal() {
         this.goalSettingsModalRef.hide();
     }
