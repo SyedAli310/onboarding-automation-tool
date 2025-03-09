@@ -64,7 +64,7 @@ export class GoalSettingsConfigComponent {
                 },
                 error: (error) => {
                     this.toastService.error(error?.message || 'Error generating SoW', { position: 'top-right' });
-                    this.isLoading = false;
+                    this.setDefaultSettings();
                 }
             });
         }
@@ -75,17 +75,22 @@ export class GoalSettingsConfigComponent {
         this._smartOnboardAPI.getAIGeneratedGoalSettings(this.generatedSoW).subscribe({
             next: (response) => {
                 this.objectiveSettings = new ObjectiveSettings(response);
-                this.objectiveSettings.goalTerminology = GoalTerminology.Objective;
-                this.objectiveSettings.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone = true;
-                this.objectiveSettings.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone = true;
-                this.objectiveSettings.objectiveLevelSettings.groupObjectivesConfig[0].isVisibleToEveryone = true;
-                this.objectiveSettings.isRollupEnabled = false;
-                this.objectiveSettings.canUpdateObjectiveProgress = false;
+                this.setDefaultSettings();
             },
             error: (error) => {
                 this.toastService.error(error?.message ?? 'Error getting goal settings', { position: 'top-right' });
+                this.setDefaultSettings();
             }
         }).add( () => this.isLoading = false);
+    }
+
+    setDefaultSettings() {
+        this.objectiveSettings.goalTerminology = GoalTerminology.Objective;
+        this.objectiveSettings.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone = true;
+        this.objectiveSettings.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone = true;
+        this.objectiveSettings.objectiveLevelSettings.groupObjectivesConfig[0].isVisibleToEveryone = true;
+        this.objectiveSettings.isRollupEnabled = false;
+        this.objectiveSettings.canUpdateObjectiveProgress = false;
     }
 
     initializeRoles() {
