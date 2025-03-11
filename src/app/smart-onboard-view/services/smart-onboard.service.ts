@@ -42,7 +42,7 @@ export class SmartOnboardService extends ApiService {
             "jobRole": "developer",
             "version": 1,
             "summary": prompt,
-            "responseFormat": "{IsModernOKR: boolean,IsAlignmentEnabled: boolean,IsRollupEnabled: boolean,ObjectiveWeightageType: string,UseKeyResults:boolean,IsKeyResultsMandatory:boolean,IsWeightageMandatory:boolean,UseInitiatives:boolean,CanUpdateObjectiveProgress:boolean,KeyResultsWeightageType:string,MaxObjectivesPerIndividual:int,MinObjectivesPerIndividual:int,AllowObjectivePriorities:boolean,CanAlignPrivateObjectives:boolean,TimeFrameFrequencies:[],UpdateFrequency:string,AutoCloseTimeFrames:boolean,CycleStartMonth:int,IsGoalSystemUpgraded:boolean,GoalTerminology:string,ObjectiveAlias:string,KeyResultAlias:string,InitiativeAlias:string,TagSettings:{AreObjectiveTagsEnabled:boolean,CanEmployeeCreateTags:boolean,AreEmployeeTagsVisible:boolean,TagAlias:string}}"
+            "responseFormat": "{IsModernOKR: boolean,IsAlignmentEnabled: boolean,IsRollupEnabled: boolean,ObjectiveWeightageType: string,UseKeyResults:boolean,IsKeyResultsMandatory:boolean,IsWeightageMandatory:boolean,UseInitiatives:boolean,CanKeyResultUpdateObjectiveProgress:boolean,KeyResultsWeightageType:string,MaxObjectivesPerIndividual:int,MinObjectivesPerIndividual:int,AllowObjectivePriorities:boolean,CanAlignPrivateObjectives:boolean,TimeFrameFrequencies:[],UpdateFrequency:string,AutoCloseTimeFrames:boolean,CycleStartMonth:int,IsGoalSystemUpgraded:boolean,GoalTerminology:string,ObjectiveAlias:string,KeyResultAlias:string,InitiativeAlias:string,TagSettings:{AreObjectiveTagsEnabled:boolean,CanEmployeeCreateTags:boolean,AreEmployeeTagsVisible:boolean,TagAlias:string}}"
         }
     }
 }
