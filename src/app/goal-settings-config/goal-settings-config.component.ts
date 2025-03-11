@@ -7,7 +7,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { ObjectiveSettings } from '../shared/models/objective-settings.model';
 import { EmployeeRole } from '../shared/models/enum.model';
 import { SmartOnboardService } from '../smart-onboard-view/services/smart-onboard.service';
-import { GroupObjectiveLevelConfig, IndividualObjectiveLevelConfig, ObjectiveLevelConfig, ObjectiveManager } from '../shared/models/objective-level-setting.model';
+import { GroupObjectiveLevelConfig, IndividualObjectiveLevelConfig, ObjectiveLevelConfig, ObjectiveLevelSettings, ObjectiveManager } from '../shared/models/objective-level-setting.model';
 import { appearAnimation } from '../shared/animations/animations';
 
 @Component({
@@ -18,7 +18,7 @@ import { appearAnimation } from '../shared/animations/animations';
 export class GoalSettingsConfigComponent {
     generatedSoW: string;
     onSave: Function;
-    objectiveSettings: ObjectiveSettings = new ObjectiveSettings({}); 
+    objectiveSettings: ObjectiveSettings;; 
     goalTerminology = GoalTerminology;
     weightageType = WeightageType;
     goalTerminologies: any;
@@ -36,6 +36,14 @@ export class GoalSettingsConfigComponent {
         return !!localStorage.getItem('meetingId');
     }
 
+    get defaultObjectiveLevelSettings() {
+        return new ObjectiveLevelSettings({
+            individualObjectivesConfig: new IndividualObjectiveLevelConfig({}),
+            companyObjectivesConfig:  new ObjectiveLevelConfig({}),
+            groupObjectivesConfig:  [new GroupObjectiveLevelConfig({})],
+        });
+    }
+
     constructor(
         public goalSettingsModalRef: BsModalRef,
         private toastService: HotToastService,
@@ -44,6 +52,7 @@ export class GoalSettingsConfigComponent {
 
     ngOnInit(): void {
         this.goalTerminologies = this.goalTerminology.getAll();
+        this.objectiveSettings = new ObjectiveSettings({objectiveLevelSettings: this.defaultObjectiveLevelSettings});
         this.initializeRoles();
         if (!this.generatedSoW) {
             this.extractSoW();
@@ -64,6 +73,7 @@ export class GoalSettingsConfigComponent {
                 },
                 error: (error) => {
                     this.toastService.error(error?.message || 'Error generating SoW', { position: 'top-right' });
+                    this.isLoading = false;
                 }
             });
         }
@@ -73,10 +83,12 @@ export class GoalSettingsConfigComponent {
         this.isLoading = true;
         this._smartOnboardAPI.getAIGeneratedGoalSettings(this.generatedSoW).subscribe({
             next: (response) => {
-                this.objectiveSettings = new ObjectiveSettings(response);
+                this.objectiveSettings = new ObjectiveSettings({...response, objectiveLevelSettings: this.defaultObjectiveLevelSettings});
+                // this.setDefaultSettings();
             },
             error: (error) => {
                 this.toastService.error(error?.message ?? 'Error getting goal settings', { position: 'top-right' });
+                // this.setDefaultSettings();
             }
         }).add( () => this.isLoading = false);
     }
@@ -119,7 +131,17 @@ export class GoalSettingsConfigComponent {
 
     getSelectedManagers(managers: Array<ObjectiveManager>) {
         return managers.map(m => m.managerName).join(', ');
-    } 
+    }
+    
+    setDefaultSettings() {
+        console.log('Default settings applied!');
+        this.objectiveSettings.goalTerminology = GoalTerminology.Objective,
+        this.objectiveSettings.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone = true,
+        this.objectiveSettings.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone = true,
+        this.objectiveSettings.objectiveLevelSettings.groupObjectivesConfig[0].isVisibleToEveryone = true,
+        this.objectiveSettings.isRollupEnabled = false,
+        this.objectiveSettings.canUpdateObjectiveProgress = false;
+    }
 
     saveGoalSettings() {
         this._smartOnboardAPI.saveGoalSettings(this.objectiveSettings).subscribe({

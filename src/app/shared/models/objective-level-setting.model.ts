@@ -19,8 +19,8 @@ export class ObjectiveLevelConfig {
     managers: Array<ObjectiveManager>;
 
     constructor(args) {
-        this.isEnabled = args.isEnabled;
-        this.isVisibleToEveryone = args.isVisibleToEveryone;
+        this.isEnabled = args?.isEnabled ?? false;
+        this.isVisibleToEveryone = args?.isVisibleToEveryone ?? false;
         this.canManageSelfObjectives = args.canManageSelfObjectives;
         this.managers = args?.managers ?? [];
     }
