@@ -38,9 +38,9 @@ export class GoalSettingsConfigComponent {
 
     get defaultObjectiveLevelSettings() {
         return new ObjectiveLevelSettings({
-            individualObjectivesConfig: new IndividualObjectiveLevelConfig({}),
-            companyObjectivesConfig:  new ObjectiveLevelConfig({}),
-            groupObjectivesConfig:  [new GroupObjectiveLevelConfig({})],
+            individualObjectivesConfig: new IndividualObjectiveLevelConfig({ isVisibleToEveryone: true }),
+            companyObjectivesConfig:  new ObjectiveLevelConfig({ isVisibleToEveryone: true }),
+            groupObjectivesConfig:  [new GroupObjectiveLevelConfig({ isVisibleToEveryone: true })],
         });
     }
 
@@ -53,6 +53,9 @@ export class GoalSettingsConfigComponent {
     ngOnInit(): void {
         this.goalTerminologies = this.goalTerminology.getAll();
         this.objectiveSettings = new ObjectiveSettings({objectiveLevelSettings: this.defaultObjectiveLevelSettings});
+        this.objectiveSettings.objectiveAlias = 'KRA';
+        this.objectiveSettings.keyResultAlias = 'KPI';
+        this.objectiveSettings.initiativeAlias = 'Task';
         this.initializeRoles();
         if (!this.generatedSoW) {
             this.extractSoW();
@@ -84,6 +87,9 @@ export class GoalSettingsConfigComponent {
         this._smartOnboardAPI.getAIGeneratedGoalSettings(this.generatedSoW).subscribe({
             next: (response) => {
                 this.objectiveSettings = new ObjectiveSettings({...response, objectiveLevelSettings: this.defaultObjectiveLevelSettings});
+                this.objectiveSettings.objectiveAlias = 'KRA';
+                this.objectiveSettings.keyResultAlias = 'KPI';
+                this.objectiveSettings.initiativeAlias = 'Task';
                 // this.setDefaultSettings();
             },
             error: (error) => {
@@ -135,15 +141,20 @@ export class GoalSettingsConfigComponent {
     
     setDefaultSettings() {
         console.log('Default settings applied!');
+        this.objectiveSettings.useKeyResults = true;
+        this.objectiveSettings.isKeyResultsMandatory = false;
         this.objectiveSettings.goalTerminology = GoalTerminology.Objective,
-        this.objectiveSettings.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone = true,
-        this.objectiveSettings.objectiveLevelSettings.companyObjectivesConfig.isVisibleToEveryone = true,
-        this.objectiveSettings.objectiveLevelSettings.groupObjectivesConfig[0].isVisibleToEveryone = true,
+        this.objectiveSettings.objectiveLevelSettings = new ObjectiveLevelSettings({
+            individualObjectivesConfig: new IndividualObjectiveLevelConfig({ isVisibleToEveryone: true }),
+            companyObjectivesConfig:  new ObjectiveLevelConfig({ isVisibleToEveryone: true }),
+            groupObjectivesConfig:  [new GroupObjectiveLevelConfig({ isVisibleToEveryone: true })],
+        });
         this.objectiveSettings.isRollupEnabled = false,
         this.objectiveSettings.canUpdateObjectiveProgress = false;
     }
 
     saveGoalSettings() {
+        this.isSaving = true;
         this._smartOnboardAPI.saveGoalSettings(this.objectiveSettings).subscribe({
             next: () => {
                 this.toastService.success('Goal settings updated successfully');
@@ -153,7 +164,7 @@ export class GoalSettingsConfigComponent {
             error: (error) => {
                 this.toastService.error(error?.message ?? 'Error saving goal settings', { position: 'top-right' });
             }
-        });
+        }).add( () => this.isSaving = false);
     }
     
     closeModal() {

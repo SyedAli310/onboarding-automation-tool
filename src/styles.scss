@@ -100,8 +100,8 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    animation: spin 1s ease-in-out infinite;
-    -webkit-animation: spin 1s ease-in-out infinite;
+    animation: spin 750ms ease-in-out infinite;
+    -webkit-animation: spin 750ms ease-in-out infinite;
 
     &.spinner-light {
         border: 3px solid rgba(255, 255, 255, .3);
@@ -147,6 +147,10 @@
         color: #a09f9f !important;
         background-size: 1em !important;
     }
+}
+
+.hot-toast-info-icon {
+    background-color: #5746AF !important;
 }
 
 .bg-shape-1 {

@@ -27,6 +27,7 @@ export class SmartOnboardViewComponent implements OnInit {
     isSoWExtractionInProgress: boolean = false;
     isFormSubmitted: boolean = false;
     generatedSoW: string | null;
+    isGoalSettingsSaved: boolean = false;
     @ViewChild('scheduleMeetingModal', { static: true }) scheduleMeetingModal: TemplateRef<any>;
 
     get isMeetingDataValid() {
@@ -78,7 +79,7 @@ export class SmartOnboardViewComponent implements OnInit {
     extractSoW() {
         if (this.isMeetingIdStored) {
             this.isSoWExtractionInProgress = true;
-            const loadingToast = this.toastService.loading('AI is generating SoW... This may take a moment.');
+            const loadingToast = this.toastService.info('AI is generating SoW... This may take a moment.');
             const storedMeetingId = localStorage.getItem('meetingId');
             this._smartOnboardAPI.extractSoWData(storedMeetingId).subscribe({
                 next: (response) => {
@@ -131,7 +132,10 @@ export class SmartOnboardViewComponent implements OnInit {
     openGoalSettingsModal() {
         const initialState = {
             generatedSoW: this.generatedSoW,
-            onSave: () => this.initializeConfetti()
+            onSave: () => {
+                this.initializeConfetti();
+                this.isGoalSettingsSaved = true;
+            }
         }
         this.modalService.show(GoalSettingsConfigComponent, { initialState, class: 'right-modal right-modal-800', ignoreBackdropClick: true, keyboard: false });
     }

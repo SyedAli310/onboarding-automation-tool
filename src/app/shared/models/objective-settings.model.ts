@@ -70,6 +70,10 @@ export class ObjectiveSettings {
         this.useInitiatives = args.useInitiatives
     }
 
+    update(data: Partial<ObjectiveSettings>) {
+        Object.assign(this, data);
+    }
+
     get areIndividualObjectivesPublic() {
         return this.objectiveLevelSettings.individualObjectivesConfig.isVisibleToEveryone;
     }

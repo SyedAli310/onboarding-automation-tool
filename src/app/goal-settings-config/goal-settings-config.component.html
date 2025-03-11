@@ -272,12 +272,18 @@
 </div>
 <div class="modal-footer">
     <ng-container *ngIf="!isEditMode">
-        <button type="button" class="btn btn-secondary btn-sm" [disabled]="isLoading" (click)="isEditMode = true">Edit</button>
-        <button type="button" class="btn btn-primary btn-sm" [disabled]="isLoading" (click)="saveGoalSettings()">Verify</button>
+        <button type="button" class="btn btn-secondary btn-sm" [disabled]="isLoading || isSaving" (click)="isEditMode = true">Edit</button>
+        <button type="button" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center" [disabled]="isLoading || isSaving" (click)="saveGoalSettings()">
+            <span class="spinner spinner-light mr-8" *ngIf="isSaving" role="status" @appearAnimation></span>
+            Verify
+        </button>
     </ng-container>
     <ng-container *ngIf="isEditMode">
         <button type="button" class="btn btn-secondary btn-sm" [disabled]="isLoading" (click)="closeModal()">Close</button>
-        <button type="button" class="btn btn-primary btn-sm" [disabled]="isLoading" (click)="saveGoalSettings()">Save & verify</button>
+        <button type="button" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center" [disabled]="isLoading || isSaving" (click)="saveGoalSettings()">
+            <span class="spinner spinner-light mr-8" *ngIf="isSaving" role="status" @appearAnimation></span>
+            Save & verify
+        </button>
     </ng-container>
 </div>
 

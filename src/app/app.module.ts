@@ -39,7 +39,7 @@ import { MarkdownPipe } from './shared/pipes/markdown.pipe';
     provideHotToastConfig({
         position: 'bottom-center',
         autoClose: true,
-        duration: 4500,
+        duration: 3700,
         dismissible: true,
         className: 'keka-toast',
         stacking: 'depth',
