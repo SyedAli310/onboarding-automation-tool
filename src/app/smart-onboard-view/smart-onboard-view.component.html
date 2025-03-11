@@ -172,7 +172,7 @@
                                 <span class="text-secondary text-small">You can join the meeting using <a href="{{joinUrl}}" class="text-link" target="_blank"><u>this link</u></a></span>
                             </div>
                         </div>
-                        <button class="btn btn-link btn-sm ml-8 d-flex align-items-center justify-content-center" [disabled]="isSoWExtractionInProgress || !canGenerateSoW" (click)="extractSoW()">
+                        <button class="btn btn-link btn-sm ml-8 d-flex align-items-center justify-content-center" [disabled]="isSoWExtractionInProgress" (click)="extractSoW()">
                             <span class="spinner spinner-dark mr-8" *ngIf="isSoWExtractionInProgress" role="status" @appearAnimation></span>
                             <i class="ki ki-star-sparkle text-primary-color mr-4"></i>
                             <span>Generate SoW</span>

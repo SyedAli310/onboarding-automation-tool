@@ -27,7 +27,6 @@ export class SmartOnboardViewComponent implements OnInit {
     isSoWExtractionInProgress: boolean = false;
     isFormSubmitted: boolean = false;
     generatedSoW: string | null;
-    canGenerateSoW: boolean = true;
     @ViewChild('scheduleMeetingModal', { static: true }) scheduleMeetingModal: TemplateRef<any>;
 
     get isMeetingDataValid() {
@@ -66,7 +65,6 @@ export class SmartOnboardViewComponent implements OnInit {
                     this.scheduleMeetingModalRef.hide();
                     this.toastService.success('Meeting scheduled successfully');
                     this.saveMeetingDataToStorage(response?.joinUrl, response?.meetingId, scheduleMeetingView.startTime);
-                    this.canGenerateSoW = true;
                 },
                 error: (error) => {
                     this.toastService.error(error?.message ?? 'Error while scheduling meeting');
@@ -87,7 +85,6 @@ export class SmartOnboardViewComponent implements OnInit {
                     loadingToast.close();
                     this.toastService.success('SoW generated successfully');
                     this.generatedSoW = response?.explanation ?? null;
-                    this.canGenerateSoW = false;
                 },
                 error: (error) => {
                     this.toastService.error(error?.message || 'Error generating SoW');
