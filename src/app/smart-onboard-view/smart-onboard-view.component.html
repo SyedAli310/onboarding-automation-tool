@@ -108,7 +108,7 @@
     <div class="card border-radius-6 clear-margin" @appearAnimation>
         <div class="card-body">
             <h4 class="mb-20 font-weight-bold" @appearAnimation>Onboarding progress</h4>
-            <div class="d-flex align-items-start gap-2 w-100 my-12 px-16">
+            <div class="d-flex align-items-start gap-2 w-100 my-12 px-16 flex-wrap">
                 <div class="d-flex flex-column align-items-center">
                     <div class="dot dot-xxl bg-primary-color-light mb-4">
                         <i class="ki ki-check-circle ki-lg text-primary"></i>
@@ -163,8 +163,8 @@
             </div>
             <div class="mb-20">
                 <button class="btn btn-primary btn-sm" (click)="openScheduleMeetingModal()">Schedule meeting</button>
-                <div class="card clear-margin-x border-radius-6" style="width: max-content;" *ngIf="isMeetingIdStored" @appearAnimation>
-                    <div class="card-body d-flex align-items-center gap-2">
+                <div class="card clear-margin-x border-radius-6" style="width: fit-content;" *ngIf="isMeetingIdStored" @appearAnimation>
+                    <div class="card-body d-flex align-items-center gap-2 flex-wrap">
                         <div class="d-flex align-items-start gap-1">
                             <i class="ki ki-check-circle-fill text-success"></i>
                             <div>
