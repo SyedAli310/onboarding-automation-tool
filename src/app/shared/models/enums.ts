@@ -7,7 +7,7 @@ export class GoalTerminology extends Enum {
     static Custom = 99;
     static 1 = 'Goal and Sub-goal';
     static 2 = 'Objective and Key Result';
-    static 3 = 'Key Responsibility Area';
+    static 3 = 'KRA and KPI';
     static 99 = 'Custom Terminology';
 }
 
